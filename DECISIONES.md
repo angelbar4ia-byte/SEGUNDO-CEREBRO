@@ -12,7 +12,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D2 | Cuidados entra como módulo | Confirmada |
 | D3 | GRAVITY sí usa dinero, por rol y sin IA en la nube | Confirmada (cuidados: propuesta) |
 | D4 | Teléfono y laptop Windows; GRAVITY controla la laptop | Confirmada |
-| D5 | Roles | Propuesta |
+| D5 | Roles y personas | Confirmada (detalles pendientes) |
 | D6 | Bocinas Xiaomi como medio de voz de GRAVITY | Propuesta |
 | D7 | Servidor: Firebase con plan Blaze | Pendiente (recomendada la opción A) |
 | D8 | Reglas para controlar la laptop | Propuesta |
@@ -37,7 +37,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 - Cada módulo es dueño de sus datos: **un solo escritor por tipo de dato** (se mantiene la sección 1 del contrato v2.0).
 - **GRAVITY no lee bases de datos.** Usa solo una lista cerrada de funciones ("herramientas") que cada módulo publica, p. ej. `habitos.resumen_hoy`, `presupuesto.agregar_a_lista`. Lo que no está en la lista no existe para GRAVITY. Toda escritura pide confirmación.
 - Los módulos se activan por partes; la app funciona con cualquier combinación de módulos activos.
-- **Familiares:** del mismo código se genera una versión solo con los módulos que les tocan (p. ej. solo Hábitos), **sin el módulo de dinero**.
+- **Familiares y cuidadores:** todos instalan la misma app y cada quien ve solo los módulos de su rol (D5); los permisos los aplica el servidor. Si hiciera falta, del mismo código se puede generar una versión aparte (p. ej. solo Hábitos).
 
 **Qué cambia del contrato v2.0.**
 - Las vías A (archivos JSON) y B (enlaces) **ya no se usan entre módulos del mismo usuario**: los datos se comparten dentro de la app. Se conservan para compartir con otras personas mientras no se decida otra cosa.
@@ -55,7 +55,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 - Gastos de cuidado y necesidades de alimentación entran a Presupuesto **con confirmación** (sección 6).
 - Acceso por rol y con consentimiento de quien representa a la persona; todo cambio queda en bitácora.
 
-**Pendiente.** Si los datos clínicos se sincronizan en la nube (necesario si hay más de un cuidador) o se quedan solo en el dispositivo.
+**Sincronización — propuesta.** Hay varios cuidadores en distintos teléfonos (D5), así que los datos de Cuidados **se sincronizan en la nube** (mismo servidor, D7), con reglas por rol. Siguen sin ir nunca a la IA en la nube.
 
 ---
 
@@ -87,18 +87,32 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 ---
 
-## D5. Roles — propuesta
+## D5. Roles y personas — confirmada (20/oct/2026)
 
-| Rol | Quién | Módulos | Dinero en GRAVITY | Cuidados |
+| Persona | Rol | Módulos | Dinero en GRAVITY | Cuidados |
 |---|---|---|---|---|
-| **Dueño** | El usuario | Todos | Completo | Completo |
-| **Co-administrador** *(opcional)* | Por definir | Por definir | Solo lectura del presupuesto | Según consentimiento |
-| **Familiar** | Otros integrantes | Hábitos y su parte de Alimentación | No | No |
-| **Cuidador** | Quien atiende a la persona bajo cuidado | Cuidados | Solo los gastos de cuidado que registra | Su parte |
-| **Casa** | Bocinas compartidas (D6) | Recetas, lista de compras, recordatorios generales | No | Solo recordatorios genéricos |
+| Usuario | **Dueño** | Todos | Completo | Completo |
+| Pareja | **Co-administrador** | Alimentación, su Hábitos; Presupuesto solo lectura | Solo lectura del presupuesto | Según consentimiento |
+| Otros familiares | **Familiar** | Su Hábitos y su parte de Alimentación | No | No |
+| Papá (Alzheimer) | **Persona bajo cuidado** | No usa la app; sus datos viven en Cuidados | — | Titular de los datos |
+| Cuidadora principal (por turnos; puede haber más) | **Cuidador** | Cuidados | Solo los gastos de cuidado que registra | Su parte |
+| Hermana (martes, después del turno de la cuidadora) | **Cuidador** (familiar) | Cuidados | Los gastos de cuidado que registra | Su parte |
+| Esposo e hijos de la hermana | Sin cuenta | — | — | — |
+| Cualquiera en casa (bocinas, D6) | **Casa** | Recetas, lista de compras, recordatorios generales | No | Solo recordatorios genéricos |
 
-- Los roles se validan **en el servidor** (reglas de la base de datos), no solo en la pantalla.
+**Reglas.**
+- Cada persona tiene **su propia cuenta**. Los roles se validan **en el servidor** (reglas de la base de datos), no solo en la pantalla.
+- **Cuidadores:** los invita el Dueño y se pueden agregar más. Al darlos de baja pierden el acceso de inmediato; lo que registraron queda en la bitácora con su nombre.
+- **Turnos:** Cuidados lleva el calendario de turnos. Los recordatorios de cuidados (medicamentos, comidas) llegan al teléfono de **quien está de turno**, y al cambiar de turno hay una **entrega de turno** (notas para quien sigue).
+- **Comidas de papá:** el cuidador de turno ve el plan de comidas de papá (solo el de él, sin costos) y registra si comió, comió poco o rechazó; eso regresa a Alimentación (contrato v2.0, sección 6).
+- La cuidadora **no ve nada de la familia** fuera de Cuidados (dinero, hábitos, menús de otros).
+- Papá no tiene cuenta; los consentimientos sobre sus datos los da quien lo representa.
 - La voz **no identifica de forma segura** a una persona: las bocinas siempre tienen el rol **Casa**.
+
+**Pendiente.**
+- Si la hermana ve el **resumen mensual del costo del cuidado** (p. ej. si comparten gastos).
+- Quién representa a papá para los consentimientos.
+- Si papá vive en la casa de las bocinas (afecta qué recordatorios se dicen en voz alta y en qué bocina).
 
 ---
 
