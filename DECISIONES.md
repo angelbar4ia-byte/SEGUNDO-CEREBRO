@@ -14,9 +14,9 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D4 | Teléfono y laptop Windows; GRAVITY controla la laptop | Confirmada |
 | D5 | Roles y personas | Confirmada (detalles pendientes) |
 | D6 | Bocinas Xiaomi como medio de voz de GRAVITY | Propuesta |
-| D7 | Servidor: Firebase con plan Blaze | Pendiente (recomendada la opción A) |
+| D7 | Servidor: Firebase con plan Blaze | Confirmada |
 | D8 | Reglas para controlar la laptop | Propuesta |
-| D9 | Puente de casa (Home Assistant) | Propuesta |
+| D9 | Puente de casa (Home Assistant), empezando en la laptop | Confirmada (equipo dedicado: pendiente) |
 
 ---
 
@@ -138,14 +138,21 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 ---
 
-## D7. Servidor — pendiente (recomendada la opción A)
+## D7. Servidor: Firebase con plan Blaze — confirmada (20/oct/2026)
 
 **Por qué ahora hace falta un servidor.** (1) La clave de la IA no puede ir dentro de las apps (contrato v2.0, sección 9.5). (2) La skill de Alexa necesita una dirección en internet que le responda. (3) La app de Windows y Alexa necesitan las herramientas de GRAVITY con roles. (4) Recordatorios programados. El plan **Spark de Firebase no permite funciones de servidor**.
 
-- **A (recomendada): Firebase con plan Blaze.** Se conservan los diseños de FINANZAS y HÁBITOS y el **modo sin conexión del teléfono**. Funciones de servidor (Cloud Functions) para el proxy de IA, la skill de Alexa, las herramientas de GRAVITY con roles y los recordatorios. Blaze pide tarjeta; el uso personal suele quedar dentro de la cuota gratuita. Se configura una alerta de presupuesto.
+- **A (elegida): Firebase con plan Blaze.** Se conservan los diseños de FINANZAS y HÁBITOS y el **modo sin conexión del teléfono**. Funciones de servidor (Cloud Functions) para el proxy de IA, la skill de Alexa, las herramientas de GRAVITY con roles y los recordatorios. Blaze pide tarjeta; el uso personal suele quedar dentro de la cuota gratuita. Se configura una alerta de presupuesto.
 - **B: cambiar a Supabase.** Un solo SDK para Android, web y Windows; roles nativos en la base de datos; funciones de servidor en el plan gratuito. Pero el teléfono pierde el modo sin conexión integrado (habría que agregar una capa local) y hay que revisar los diseños de FINANZAS y HÁBITOS.
 
-**Arquitectura con la opción A.** Las pantallas del teléfono usan la base de datos directo (sin conexión incluida). **Todos los GRAVITY** (teléfono, Windows, Alexa) usan **las mismas herramientas del servidor**, donde se aplican los roles (D5) y la regla de que el dinero no pasa por la IA en la nube (D3). Las acciones sobre la laptop (D8) se ejecutan en la propia laptop.
+**Arquitectura.** Las pantallas del teléfono usan la base de datos directo (sin conexión incluida). **Todos los GRAVITY** (teléfono, Windows y bocinas a través del puente de casa) usan **las mismas herramientas del servidor**, donde se aplican los roles (D5) y la regla de que el dinero no pasa por la IA en la nube (D3). Las acciones sobre la laptop (D8) se ejecutan en la propia laptop.
+
+**Reglas de configuración.**
+- **Un solo proyecto de Firebase** para todo el sistema (reemplaza la vía D "solo si se decide después" del contrato v2.0).
+- **Ubicación de la base de datos:** se elige al crearla y **no se puede cambiar**. Firestore está disponible en Querétaro, México ([ubicaciones de Firestore](https://docs.cloud.google.com/firestore/docs/locations?hl=fr)). Base de datos y funciones en la misma región; si las funciones no están en Querétaro, ambas en la región de EE. UU. más cercana. Verificar al crear el proyecto.
+- **Alerta de presupuesto** (p. ej. US$5 al mes) y límite de instancias en las funciones. La alerta avisa, no detiene el gasto.
+- La clave de la IA vive en los **secretos del servidor**, nunca en las apps.
+- **Desarrollo con el emulador de Firebase** en la laptop; los datos reales de la familia solo en el proyecto real.
 
 ---
 
@@ -160,7 +167,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 ---
 
-## D9. Puente de casa — propuesta
+## D9. Puente de casa — confirmada (20/oct/2026; fase 1 en la laptop)
 
 **Por qué.** Chromecast solo funciona **dentro de la red de la casa**: el servidor en la nube no puede hablarle directo a las bocinas, y la laptop no está siempre encendida.
 
@@ -170,6 +177,11 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 - A futuro: satélites de voz, luces, control infrarrojo y otros aparatos de la casa.
 - Conexión con Google: suscripción de Home Assistant Cloud (lo más simple) o configuración manual con un túnel seguro (gratis, más trabajo). **Nunca se abren puertos del router.**
 
-**Para empezar.** Se puede probar con la laptop como puente (Home Assistant en una máquina virtual de Windows); mientras tanto, las bocinas solo funcionan con la laptop encendida.
+**Fase 1 (elegida): la laptop como puente.** Home Assistant en una máquina virtual de Windows.
+- Las bocinas solo responden con la laptop **encendida, sin suspender y en el Wi-Fi de casa**.
+- La máquina virtual usa red en **modo puente** (bridge) para que encuentre las bocinas en la red de casa.
+- Todo lo de esta fase se configura de modo que pase tal cual al equipo dedicado.
 
-**Pendiente.** Qué equipo usar (Raspberry Pi, Home Assistant Green o mini PC) y qué conexión con Google.
+**Fase 2:** equipo dedicado siempre encendido.
+
+**Pendiente.** Qué equipo usar en la fase 2 (Raspberry Pi, Home Assistant Green o mini PC) y qué conexión con Google (Home Assistant Cloud o túnel seguro).
