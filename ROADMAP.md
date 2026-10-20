@@ -1,5 +1,7 @@
 # Roadmap de GRAVITY (proyecto Segundo Cerebro)
 
+> **Fuente movida (20/oct/2026, D10):** este archivo queda como historial. La versión vigente está en el repositorio **GRAVITY**, carpeta `docs/`.
+
 > **Versión 0.5 (20/oct/2026), aprobada.** La construcción **empieza cuando el dueño del proyecto dé la orden**. Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
 >
 > Este archivo vive en la raíz de SEGUNDO-CEREBRO mientras se confirma D10; después pasa a `GRAVITY/docs/`.

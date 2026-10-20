@@ -1,5 +1,7 @@
 # Decisiones de arquitectura (SEGUNDO CEREBRO)
 
+> **Fuente movida (20/oct/2026, D10):** este archivo queda como historial. La versión vigente está en el repositorio **GRAVITY**, carpeta `docs/`.
+
 Registro de las decisiones que cambian cómo se conectan las piezas del sistema. Cada una dice **qué** se decidió, **por qué** y **qué cambia**.
 
 Estados: **confirmada** (aprobada por el dueño del proyecto), **propuesta** (falta su visto bueno), **pendiente** (falta decidir).

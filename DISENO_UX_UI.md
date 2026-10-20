@@ -1,5 +1,7 @@
 # Diseño UX/UI de GRAVITY
 
+> **Fuente movida (20/oct/2026, D10):** este archivo queda como historial. La versión vigente está en el repositorio **GRAVITY**, carpeta `docs/`.
+
 > **Versión 0.5 (20/oct/2026), borrador para definir juntos.** Documento común de experiencia y diseño visual de toda la app: la **pantalla principal de GRAVITY en la laptop**, las **pantallas de los módulos**, la **app del teléfono**, la **tablet portátil de la casa** y la **pulsera (smart band)**. Las pantallas de cada módulo siguen en sus diseños (FINANZAS, sección 8; HÁBITOS, Anexo G) y deben respetar este documento.
 >
 > **(decidido)** = ya lo confirmaste. **(propuesto)** = sugerencia para revisar. Las preguntas para definir están en la sección 22.
