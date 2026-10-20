@@ -13,9 +13,10 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D3 | GRAVITY sí usa dinero, por rol y sin IA en la nube | Confirmada (cuidados: propuesta) |
 | D4 | Teléfono y laptop Windows; GRAVITY controla la laptop | Confirmada |
 | D5 | Roles | Propuesta |
-| D6 | Bocinas, Alexa y Google | Propuesta |
+| D6 | Bocinas Xiaomi como medio de voz de GRAVITY | Propuesta |
 | D7 | Servidor: Firebase con plan Blaze | Pendiente (recomendada la opción A) |
 | D8 | Reglas para controlar la laptop | Propuesta |
+| D9 | Puente de casa (Home Assistant) | Propuesta |
 
 ---
 
@@ -82,7 +83,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | Presupuesto y Alimentación | Gasto al momento, lista de compras en el súper, qué como hoy | Presupuesto del mes, estados de cuenta, menú semanal, recetas, reportes (versión web) |
 | Hábitos y Objetivos | Marcar hábitos y comidas, ejercicio y bici (GPS), sueño, peso y agua (Health Connect) | Revisión semanal, objetivos (versión web) |
 | Cuidados | Medicamentos a tiempo, bitácora del cuidador | Citas, resumen, costos (versión web) |
-| GRAVITY | Voz en cualquier lugar, recordatorios | App de Windows: voz y texto, control de la laptop, avisos a bocinas Google (D6) |
+| GRAVITY | Voz en cualquier lugar, recordatorios | App de Windows: voz y texto, control de la laptop; puente de casa provisional (D9) |
 
 ---
 
@@ -101,16 +102,25 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 ---
 
-## D6. Bocinas, Alexa y Google — propuesta
+## D6. Bocinas Xiaomi como medio de voz de GRAVITY — propuesta
 
-| Vía | Qué permite | Límites |
+**Equipos.** Dos **Xiaomi Smart Speaker (IR Control)**, modelo L05G: traen **Google Assistant** y **Chromecast integrado** ([Xiaomi](https://www.mi.com/global/product/xiaomi-smart-speaker-ir-control/)). No está confirmado si recibirán Gemini para Home.
+
+**Límite de Google.** Google no deja que otras apps reciban lo que se le dice libremente a sus bocinas: las acciones conversacionales de terceros se cerraron en 2023 y lo nuevo ([Gemini built in](https://9to5google.com/2026/05/21/gemini-built-in-will-bring-google-home-ai-to-more-third-party-speakers-this-year/)) es para fabricantes. Por estas bocinas GRAVITY **no tiene conversación libre**; se usa así:
+
+| Dirección | Cómo | Ejemplos |
 |---|---|---|
-| **Bocina Bluetooth** o la del teléfono/laptop | GRAVITY habla con su propia voz; todo lo que el rol permita | Ninguno nuevo |
-| **Alexa** (skill propia "Gravity", español de México) | Dos sentidos: receta paso a paso (*"Alexa, pídele a Gravity el siguiente paso"*), recomendaciones de comida, lista de compras; recordatorios en el Echo con permiso del usuario ([API de recordatorios](https://developer.amazon.com/en-US/docs/alexa/smapi/alexa-reminders-overview.html)) | Necesita servidor (D7). Todo lo dicho pasa por Amazon → rol **Casa**. A verificar: funcionamiento con Alexa+ |
-| **Google / Nest** | Solo avisos de un sentido: la app de Windows envía el audio a la bocina por la red de casa (Google Cast) | Google no ofrece hoy forma pública de crear acciones propias para sus bocinas ([Gemini built in](https://9to5google.com/2026/05/21/gemini-built-in-will-bring-google-home-ai-to-more-third-party-speakers-this-year/) es para fabricantes). Requiere la laptop encendida y en la misma red. A verificar con una prueba |
+| **Pedirle a GRAVITY** | **Frases fijas**: rutina de Google Home con comando de voz propio → activa una escena virtual del puente de casa (D9) → GRAVITY ejecuta la herramienta | *"Hey Google, siguiente paso"*, *"paso anterior"*, *"repite el paso"*, *"qué cocino hoy"*, *"lee la lista de compras"*, *"qué toca hoy"* |
+| **GRAVITY habla** | GRAVITY genera la voz y el puente de casa la envía a la bocina por Chromecast | Recordatorios, receta paso a paso, recomendaciones, respuesta a las frases fijas |
+| **Control infrarrojo** (tele, aire) | Ya funciona con Xiaomi Home + Google Home | Que GRAVITY lo use: a verificar |
 
-- **Orden:** Bluetooth (sin costo extra) → Alexa → Google.
-- **Nada de dinero ni datos clínicos por bocinas**; recordatorios de cuidados solo genéricos (D3).
+**Reglas.**
+- Las frases fijas **no llevan datos libres**: *"agrega leche a la lista"* no se puede por la bocina; eso va por teléfono o laptop.
+- Rol **Casa** (D5): **nada de dinero ni datos clínicos**; recordatorios de cuidados solo genéricos (D3). Lo que se dice a la bocina pasa por Google.
+- Cada frase se asigna a una bocina concreta (p. ej. las de recetas a la de la cocina) para que GRAVITY responda donde la escucharon.
+- Conversación libre por voz en casa: teléfono, laptop o, a futuro, un micrófono propio de GRAVITY (satélite de voz conectado al puente de casa).
+
+**Otras vías.** Bocina Bluetooth conectada al teléfono o la laptop: disponible siempre. Alexa: solo si algún día se compra un Echo (skill propia con [API de recordatorios](https://developer.amazon.com/en-US/docs/alexa/smapi/alexa-reminders-overview.html)).
 
 ---
 
@@ -133,3 +143,19 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 - Bitácora de todas las acciones.
 
 **Pendiente.** La lista concreta de acciones: qué programas, qué correo (Gmail u Outlook), calendario, etc.
+
+---
+
+## D9. Puente de casa — propuesta
+
+**Por qué.** Chromecast solo funciona **dentro de la red de la casa**: el servidor en la nube no puede hablarle directo a las bocinas, y la laptop no está siempre encendida.
+
+**Propuesta.** Un equipo pequeño **siempre encendido** en la red de casa con **Home Assistant**:
+- Expone las frases fijas de GRAVITY a Google Home y envía la voz de GRAVITY a las bocinas (D6).
+- Pide al servidor de GRAVITY (D7) que ejecute las herramientas, siempre con el rol **Casa**.
+- A futuro: satélites de voz, luces, control infrarrojo y otros aparatos de la casa.
+- Conexión con Google: suscripción de Home Assistant Cloud (lo más simple) o configuración manual con un túnel seguro (gratis, más trabajo). **Nunca se abren puertos del router.**
+
+**Para empezar.** Se puede probar con la laptop como puente (Home Assistant en una máquina virtual de Windows); mientras tanto, las bocinas solo funcionan con la laptop encendida.
+
+**Pendiente.** Qué equipo usar (Raspberry Pi, Home Assistant Green o mini PC) y qué conexión con Google.
