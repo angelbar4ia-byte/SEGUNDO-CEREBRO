@@ -1,0 +1,9 @@
+[submodule "FINANZAS"]
+	path = FINANZAS
+	url = https://github.com/angelbar4ia-byte/FINNZAS.git
+[submodule "GRAVITY"]
+	path = GRAVITY
+	url = https://github.com/angelbar4ia-byte/GRAVITY.git
+[submodule "HABITOS"]
+	path = HABITOS
+	url = https://github.com/angelbar4ia-byte/HABITOS.git
