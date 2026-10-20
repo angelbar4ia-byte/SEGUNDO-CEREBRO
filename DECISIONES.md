@@ -11,10 +11,10 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D1 | Una sola app modular | Confirmada |
 | D2 | Cuidados entra como módulo | Confirmada |
 | D3 | GRAVITY sí usa dinero, por rol y sin IA en la nube | Confirmada (cuidados: propuesta) |
-| D4 | Teléfono y laptop Windows; GRAVITY controla la laptop | Confirmada |
+| D4 | Laptop Windows con el sistema completo; teléfono con lo mínimo | Confirmada |
 | D5 | Roles y personas | Confirmada (detalles pendientes) |
 | D6 | Bocinas Xiaomi como medio de voz de GRAVITY | Propuesta |
-| D7 | Servidor: Firebase con plan Blaze | Confirmada |
+| D7 | Servidor: Supabase (plan gratis); Firebase solo para avisos y reparto de la app | Confirmada (papel de Firebase: propuesta) |
 | D8 | Reglas para controlar la laptop | Propuesta |
 | D9 | Puente de casa (Home Assistant), empezando en la laptop | Confirmada (equipo dedicado: pendiente) |
 
@@ -71,19 +71,25 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 ---
 
-## D4. Teléfono y laptop — confirmada (20/oct/2026)
+## D4. Laptop completa, teléfono mínimo — confirmada (20/oct/2026)
 
-**Decisión.** Los datos viven en la nube (servidor: D7); el **teléfono y la laptop son dos pantallas del mismo sistema**. Ninguna depende de que la otra esté encendida.
+**Decisión.** La **laptop (Windows)** tiene el **sistema completo**: toda la planeación, la configuración y GRAVITY completo, que además **controla la computadora** (D8). El **teléfono** tiene **lo mínimo** para registrar y consultar el día. Mismo código Flutter: Windows recibe la versión completa y Android la reducida.
 
-- **Laptop: Windows.** GRAVITY en la laptop **controla la computadora** (reglas en D8), así que es una **app de escritorio para Windows**, del mismo código Flutter.
-- **Restricción técnica:** el SDK oficial de Firebase para Flutter en Windows es *"for development only. Production on Windows is not supported"* ([FlutterFire](https://github.com/firebase/flutterfire)). Por eso la app de Windows **no se conecta directo a la base de datos**: usa las herramientas del servidor (D7). Las pantallas de los módulos en la laptop se usan en la **versión web** (navegador), donde Firebase sí es para producción; GRAVITY puede abrirlas.
+**Los datos viven en la nube (D7), no en la laptop.** La cuidadora y la familia los necesitan con la laptop apagada o fuera de casa, y la laptop se puede perder o descomponer. La laptop guarda **cada día una copia completa** de todo.
 
-| | Teléfono (lo diario) | Laptop (planear, analizar, controlar) |
+| Quién | En el teléfono (lo mínimo) | En la laptop |
 |---|---|---|
-| Presupuesto y Alimentación | Gasto al momento, lista de compras en el súper, qué como hoy | Presupuesto del mes, estados de cuenta, menú semanal, recetas, reportes (versión web) |
-| Hábitos y Objetivos | Marcar hábitos y comidas, ejercicio y bici (GPS), sueño, peso y agua (Health Connect) | Revisión semanal, objetivos (versión web) |
-| Cuidados | Medicamentos a tiempo, bitácora del cuidador | Citas, resumen, costos (versión web) |
-| GRAVITY | Voz en cualquier lugar, recordatorios | App de Windows: voz y texto, control de la laptop; puente de casa provisional (D9) |
+| **Dueño** | Registrar gasto, marcar comidas y hábitos, plan del día, lista de compras, peso, sueño y ejercicio (Health Connect), recordatorios, GRAVITY por voz | **Todo lo demás:** presupuesto, estados de cuenta, menús y recetas, objetivos, reportes, configuración de Cuidados (medicamentos, citas, turnos), roles, GRAVITY completo, bocinas, copias de seguridad |
+| **Pareja** | Lo suyo, más un resumen del presupuesto (solo lectura) | Solo si tiene su propia computadora |
+| **Cuidadora y hermana** | **Todo su trabajo:** horario de medicamentos y marcar los que ya dieron, comidas de papá, bitácora, entrega de turno, gastos de cuidado | No la usan |
+| **Familiares** | Sus hábitos y su plan del día | No la usan |
+
+**Cambios urgentes desde el teléfono (Dueño).** Lo demás espera a la laptop.
+- Suspender o agregar un medicamento, con nota para la cuidadora de turno (le llega un aviso al instante).
+- Agregar algo a la lista de compras.
+- Mover un recordatorio.
+
+**Qué cambia en los diseños.** FINANZAS (v23) y HÁBITOS (v1.18) se pensaron como apps completas de teléfono: al actualizar sus .md se separa qué va en el teléfono y qué en la laptop.
 
 ---
 
@@ -138,27 +144,52 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 ---
 
-## D7. Servidor: Firebase con plan Blaze — confirmada (20/oct/2026)
+## D7. Servidor: Supabase (plan gratis) — confirmada (20/oct/2026)
 
-**Por qué ahora hace falta un servidor.** (1) La clave de la IA no puede ir dentro de las apps (contrato v2.0, sección 9.5). (2) La skill de Alexa necesita una dirección en internet que le responda. (3) La app de Windows y Alexa necesitan las herramientas de GRAVITY con roles. (4) Recordatorios programados. El plan **Spark de Firebase no permite funciones de servidor**.
+*Historial: el mismo día se confirmó Firebase Blaze y luego se reemplazó por Supabase, al fijar como condiciones el costo cero y la laptop como centro del sistema (D4).*
 
-- **A (elegida): Firebase con plan Blaze.** Se conservan los diseños de FINANZAS y HÁBITOS y el **modo sin conexión del teléfono**. Funciones de servidor (Cloud Functions) para el proxy de IA, la skill de Alexa, las herramientas de GRAVITY con roles y los recordatorios. Blaze pide tarjeta; el uso personal suele quedar dentro de la cuota gratuita. Se configura una alerta de presupuesto.
-- **B: cambiar a Supabase.** Un solo SDK para Android, web y Windows; roles nativos en la base de datos; funciones de servidor en el plan gratuito. Pero el teléfono pierde el modo sin conexión integrado (habría que agregar una capa local) y hay que revisar los diseños de FINANZAS y HÁBITOS.
+**Decisión.** **Supabase en su plan gratis** es el servidor: base de datos compartida, cuentas, roles, archivos pequeños y una función de servidor que guarda la clave de la IA.
 
-**Arquitectura.** Las pantallas del teléfono usan la base de datos directo (sin conexión incluida). **Todos los GRAVITY** (teléfono, Windows y bocinas a través del puente de casa) usan **las mismas herramientas del servidor**, donde se aplican los roles (D5) y la regla de que el dinero no pasa por la IA en la nube (D3). Las acciones sobre la laptop (D8) se ejecutan en la propia laptop.
+**Por qué.**
+- **Funciona nativo en Windows** ([supabase_flutter](https://pub.dev/packages/supabase_flutter)). El SDK de Firebase para Windows es *"for development only"* ([FlutterFire](https://github.com/firebase/flutterfire)), y **Blaze no cambia eso**.
+- **Costo cero sin tarjeta:** al llegar a un límite se restringe, no cobra.
+- **Base de datos relacional (Postgres):** mejor para cuentas y reportes de dinero.
+- Incluye funciones de servidor y 1 GB de archivos. Firebase gratis (Spark) no tiene funciones de servidor y, desde febrero de 2026, tampoco archivos ([FAQ de Firebase](https://firebase.google.com/docs/storage/faqs-storage-changes-announced-sept-2024?hl=es)).
 
-**Reglas de configuración.**
-- **Un solo proyecto de Firebase** para todo el sistema (reemplaza la vía D "solo si se decide después" del contrato v2.0).
-- **Ubicación de la base de datos:** se elige al crearla y **no se puede cambiar**. Firestore está disponible en Querétaro, México ([ubicaciones de Firestore](https://docs.cloud.google.com/firestore/docs/locations?hl=fr)). Base de datos y funciones en la misma región; si las funciones no están en Querétaro, ambas en la región de EE. UU. más cercana. Verificar al crear el proyecto.
-- **Alerta de presupuesto** (p. ej. US$5 al mes) y límite de instancias en las funciones. La alerta avisa, no detiene el gasto.
-- La clave de la IA vive en los **secretos del servidor**, nunca en las apps.
-- **Desarrollo con el emulador de Firebase** en la laptop; los datos reales de la familia solo en el proyecto real.
+**Arquitectura.**
+- **Teléfono:** guarda los registros en el propio teléfono y los envía cuando hay señal; guarda una copia del plan del día.
+- **Laptop:** app de Windows conectada directo a la base de datos.
+- **Roles (D5):** reglas por registro de la base de datos (RLS), aplicadas en el servidor.
+- **Herramientas de GRAVITY:** corren en el dispositivo con los permisos de quien la usa; las reglas por registro garantizan el rol. La regla de D3 (el dinero no pasa por la IA en la nube) se aplica en las herramientas. La función de servidor solo guarda la clave de la IA y envía avisos.
+- **Recordatorios programados** (medicamentos, hábitos): notificaciones del propio teléfono, programadas a partir de los horarios y turnos sincronizados; funcionan sin internet.
+
+**Límites del plan gratis y cómo se cubren** ([resumen de límites 2026](https://uibakery.io/blog/supabase-pricing)).
+
+| Límite | Cómo se cubre |
+|---|---|
+| 500 MB de base de datos | Alcanza para años de registros de texto |
+| 1 GB de archivos | Fotos comprimidas; las viejas se mueven a la laptop |
+| Se pausa tras 7 días sin uso | Con uso diario no ocurre; si ocurre, los datos se conservan y se reactiva a mano |
+| Sin copias de seguridad automáticas | La laptop hace una copia completa diaria, y otra cifrada fuera de la laptop (p. ej. disco externo) |
+| Sin modo sin conexión incluido | El teléfono solo registra: cola local de registros. Si hiciera falta más: [PowerSync](https://docs.powersync.com/integration-guides/supabase-+-powersync) |
+
+**Configuración.**
+- **Un solo proyecto** para todo el sistema (reemplaza la vía D del contrato v2.0). Región: la de EE. UU. más cercana a México; se elige al crear y no se cambia sin migrar.
+- La clave de la IA vive en los **secretos de la función de servidor**, nunca en las apps.
+- **Desarrollo con Supabase local** en la laptop; los datos reales de la familia solo en el proyecto real.
+
+**Papel de Firebase — propuesta.** No es la base de datos, pero se usa para lo que da **gratis sin Blaze**:
+- **Avisos al instante (Firebase Cloud Messaging):** p. ej. a la cuidadora de turno cuando cambia un medicamento (cambios urgentes, D4), o al Dueño si un medicamento no se marcó a tiempo. Los envía la función de servidor de Supabase.
+- **Reporte de fallas (Crashlytics)** en los teléfonos.
+- **Reparto de la app (App Distribution)** a los teléfonos de la familia y las cuidadoras, sin publicarla en Google Play.
+
+**Plan B: Firebase Blaze.** No se construye en paralelo (sería doble trabajo en datos, reglas y funciones). El acceso a datos de cada módulo va en una **capa separada** para que un cambio sea posible, aunque no automático (hay que migrar datos, reglas y funciones). Se considera solo si los límites del plan gratis no alcanzan o las pausas causan problemas. El costo no sería el motivo: con este uso (unas 6 personas, cientos de registros al día) Firestore quedaría muy por debajo de su cuota gratis diaria (50,000 lecturas y 20,000 escrituras), así que Blaze probablemente también costaría $0.
 
 ---
 
 ## D8. Control de la laptop — propuesta
 
-- **Lista cerrada de acciones** (p. ej. abrir programas y archivos, buscar archivos, leer y redactar correos, abrir la versión web de los módulos). Lo que no está en la lista no se puede hacer.
+- **Lista cerrada de acciones** (p. ej. abrir programas y archivos, buscar archivos, leer y redactar correos, abrir pantallas de los módulos). Lo que no está en la lista no se puede hacer.
 - **Confirmación** antes de enviar, borrar, mover, instalar o pagar. GRAVITY **nunca** opera banca en línea ni compras.
 - Lo que GRAVITY **lee** (correos, páginas web, archivos) es información, **nunca órdenes**: si un correo dice "borra tal carpeta", no se ejecuta.
 - Bitácora de todas las acciones.
@@ -173,7 +204,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 
 **Propuesta.** Un equipo pequeño **siempre encendido** en la red de casa con **Home Assistant**:
 - Expone las frases fijas de GRAVITY a Google Home y envía la voz de GRAVITY a las bocinas (D6).
-- Pide al servidor de GRAVITY (D7) que ejecute las herramientas, siempre con el rol **Casa**.
+- Ejecuta las herramientas de GRAVITY con una **cuenta propia de rol Casa** (D5), así que nunca alcanza dinero ni datos clínicos.
 - A futuro: satélites de voz, luces, control infrarrojo y otros aparatos de la casa.
 - Conexión con Google: suscripción de Home Assistant Cloud (lo más simple) o configuración manual con un túnel seguro (gratis, más trabajo). **Nunca se abren puertos del router.**
 
