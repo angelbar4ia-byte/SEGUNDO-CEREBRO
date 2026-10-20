@@ -21,6 +21,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D11 | Prioridad Finanzas → Hábitos; funcional primero, pulido después | Confirmada |
 | D12 | Laptop con pantalla principal de GRAVITY tipo JARVIS; teléfono como app normal | Confirmada |
 | D13 | Datos sensibles de Hábitos: cifrados en la nube o solo en el teléfono, a elegir | Confirmada |
+| D14 | Tablet maestra de la casa con cambio de usuario | Confirmada (detalles propuestos) |
 
 ---
 
@@ -264,6 +265,7 @@ GRAVITY/
 - **Laptop:** la pantalla principal es GRAVITY tipo JARVIS. Desde ahí se abren los módulos.
 - **Teléfono:** app normal, sin pantalla tipo JARVIS; GRAVITY es una función más (botón de micrófono).
 - **Diseño UX/UI común:** se define en paralelo en `DISENO_UX_UI.md`.
+- **Estilo configurable** (20/oct/2026): varios estilos (futurista, minimalista, claro, arquitectónico, glass, swagger), claro/oscuro automático por hora y personalidad por módulo y submódulo, sin perder una base común. **Voces configurables** por persona. Detalle en `DISENO_UX_UI.md`.
 
 ---
 
@@ -279,4 +281,18 @@ GRAVITY/
 - Ninguno de los dos modos se envía a la IA (D3 y diseño de HÁBITOS, sección 10).
 - El valor por defecto se fija en la especificación de la Fase 3.
 - Si se pierde la llave del modo cifrado, esos datos no se pueden recuperar: la especificación debe incluir cómo respaldar la llave.
+
+---
+
+## D14. Tablet maestra de la casa — confirmada (20/oct/2026; detalles propuestos)
+
+**Decisión.** Además de la laptop y los teléfonos, hay una **tablet Android fija en la casa** (cocina o sala) como uso maestro del hogar. Es la misma app, con diseño para tablet.
+
+**Propuesto**
+- **Modo Casa** en reposo: usa la cuenta de rol **Casa** (D5), sin dinero ni datos clínicos. Muestra lo de hoy en la casa, el menú, la lista de compras, el turno de cuidados con recordatorios genéricos y GRAVITY.
+- **Cambio de usuario:** cada persona entra con PIN o huella y ve sus pantallas según su rol; tras 2 minutos sin uso (editable) regresa al modo Casa. La cuidadora y la hermana pueden trabajar su turno desde ahí.
+- **Micrófono propio de GRAVITY en casa:** la tablet permite la conversación libre que las bocinas Xiaomi no permiten (D6). Por definir la palabra de activación con la tablet cargando.
+- **Vista en planta** de la casa como pantalla de inicio (detalle en `DISENO_UX_UI.md`, sección 10).
+
+**Pendiente.** Qué tablet usar y dónde va; si la vista en planta se dibuja con la planta real de la casa.
 

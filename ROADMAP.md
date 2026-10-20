@@ -1,6 +1,6 @@
 # Roadmap de GRAVITY (proyecto Segundo Cerebro)
 
-> **Versión 0.2 (20/oct/2026), aprobada.** La construcción **empieza cuando el dueño del proyecto dé la orden**. Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
+> **Versión 0.3 (20/oct/2026), aprobada.** La construcción **empieza cuando el dueño del proyecto dé la orden**. Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
 >
 > Este archivo vive en la raíz de SEGUNDO-CEREBRO mientras se confirma D10; después pasa a `GRAVITY/docs/`.
 
@@ -43,7 +43,9 @@ Orden de las fases 0 a 7 confirmado el 20/oct/2026 (sección 10).
 **Antes de empezar:** juntar los repositorios (D10, si se confirma), convertir el contrato v2.0 en reglas internas entre módulos (v3.0) y escribir la especificación de la fase.
 
 **Incluye**
-- Proyecto Flutter con dos salidas: **Windows (completa)** y **Android (mínima)**; estructura por módulos; tema central claro y oscuro.
+- Proyecto Flutter con dos salidas: **Windows (completa)** y **Android** (teléfono mínimo y tablet de la casa); estructura por módulos.
+- **Sistema de estilos** (`DISENO_UX_UI.md`, sección 4): valores de diseño en el tema central, dos estilos para empezar (Futurista y uno claro) y claro/oscuro automático por hora.
+- **Tablet de la casa (D14):** diseño para tablet, modo Casa y cambio de usuario con PIN o huella. El modo Casa se va llenando conforme entran los módulos.
 - **Supabase (D7):** proyecto real y versión local para desarrollo; cuentas (correo o Google); tablas base de hogar, personas y roles; reglas por registro (RLS) para los roles de D5.
 - **Firebase (D7):** avisos al instante (FCM), reporte de fallas (Crashlytics) y reparto de la app (App Distribution).
 - **Teléfono:** cola local de registros para trabajar sin conexión y bloqueo con PIN o huella.
@@ -57,6 +59,8 @@ Orden de las fases 0 a 7 confirmado el 20/oct/2026 (sección 10).
 3. Un registro hecho sin internet en el teléfono se sube al volver la señal.
 4. La copia de seguridad diaria se genera y se puede restaurar en el entorno local.
 5. La app llega a un teléfono de prueba por App Distribution.
+6. En la tablet, el modo Casa no muestra dinero; al tocar un nombre y poner el PIN aparecen las pantallas de esa persona, y tras 2 minutos sin uso regresa sola al modo Casa.
+7. El estilo se cambia en Ajustes sin reiniciar, y el claro/oscuro cambia solo según la hora.
 
 ---
 
@@ -75,6 +79,8 @@ Base: diseño de FINANZAS v23, sección 10 (MVP 1).
 | Datos semilla (importar Excel/CSV) | Importación | — |
 
 **Queda para después:** captura por voz e imagen (foto, OCR, QR), modo Pareja y Familiar completo, conciliación con estados de cuenta y reportes de auditoría.
+
+**Se define en la especificación de esta fase:** los roles y permisos financieros entre miembros (albacea, confirmaciones, qué registra la pareja), tomando como base la sección 5.0 ter del diseño de FINANZAS.
 
 **Aceptación:** las pruebas del motor de presupuesto (5.6 bis) y del libro de movimientos (5.0 bis) pasan; registrar un gasto en el teléfono toma menos de 10 s; la app abre en menos de 2 s (decisión 24 de FINANZAS).
 
@@ -123,6 +129,7 @@ Algunas funciones de Hábitos se usan **en el momento** y por eso van en el tel�
 ## 7. Fase 4 — Pulido 1
 
 - Aplicar el sistema de diseño de `DISENO_UX_UI.md` a la pantalla de GRAVITY, a Finanzas y a Hábitos.
+- Agregar los demás estilos (arquitectónico, glass, swagger, minimalista), la personalidad por módulo y submódulo, y los gadgets.
 - Corregir la lista de "lo que estorba" juntada durante el uso real de las fases 1 a 3.
 - Cumplir las metas de rendimiento: abrir en menos de 2 s, registrar un gasto en menos de 10 s y la acción diaria de Hábitos en 3 toques o menos.
 - Traer de "después" lo que haya resultado urgente.
@@ -183,3 +190,4 @@ Por bloques, cada uno con su pasada funcional y su pulido.
 |---|---|---|
 | 0.1 | 20/oct/2026 | Primera versión: prioridad Finanzas → Hábitos, funcional primero y pulido después, pantalla principal de GRAVITY en la laptop y app normal en el teléfono |
 | 0.2 | 20/oct/2026 | Aprobado: orden de las fases 5 a 7, Finanzas MVP 1 y 2 como prioritarios, lectura espiritual en el teléfono y los dos modos para datos sensibles (D13). La construcción espera la orden de inicio |
+| 0.3 | 20/oct/2026 | Tablet de la casa (D14) y sistema de estilos en la Fase 0; los demás estilos, la personalidad por módulo y los gadgets en el Pulido 1; los roles financieros entre miembros se definen en la especificación de la Fase 1 |
