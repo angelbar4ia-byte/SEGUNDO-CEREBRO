@@ -14,9 +14,10 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D4 | Laptop Windows con el sistema completo; teléfono con lo mínimo | Confirmada |
 | D5 | Roles y personas | Confirmada (detalles pendientes) |
 | D6 | Bocinas Xiaomi como medio de voz de GRAVITY | Propuesta |
-| D7 | Servidor: Supabase (plan gratis); Firebase solo para avisos y reparto de la app | Confirmada (papel de Firebase: propuesta) |
+| D7 | Servidor: Supabase (plan gratis); Firebase solo para avisos y reparto de la app | Confirmada |
 | D8 | Reglas para controlar la laptop | Propuesta |
 | D9 | Puente de casa (Home Assistant), empezando en la laptop | Confirmada (equipo dedicado: pendiente) |
+| D10 | Todo el código y los documentos en el repositorio GRAVITY | Propuesta |
 
 ---
 
@@ -178,7 +179,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 - La clave de la IA vive en los **secretos de la función de servidor**, nunca en las apps.
 - **Desarrollo con Supabase local** en la laptop; los datos reales de la familia solo en el proyecto real.
 
-**Papel de Firebase — propuesta.** No es la base de datos, pero se usa para lo que da **gratis sin Blaze**:
+**Papel de Firebase — confirmado.** No es la base de datos, pero se usa para lo que da **gratis sin Blaze**:
 - **Avisos al instante (Firebase Cloud Messaging):** p. ej. a la cuidadora de turno cuando cambia un medicamento (cambios urgentes, D4), o al Dueño si un medicamento no se marcó a tiempo. Los envía la función de servidor de Supabase.
 - **Reporte de fallas (Crashlytics)** en los teléfonos.
 - **Reparto de la app (App Distribution)** a los teléfonos de la familia y las cuidadoras, sin publicarla en Google Play.
@@ -216,3 +217,30 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 **Fase 2:** equipo dedicado siempre encendido.
 
 **Pendiente.** Qué equipo usar en la fase 2 (Raspberry Pi, Home Assistant Green o mini PC) y qué conexión con Google (Home Assistant Cloud o túnel seguro).
+
+---
+
+## D10. Todo el código y los documentos en el repositorio GRAVITY — propuesta
+
+**Decisión propuesta.** El repositorio **GRAVITY** se vuelve el repositorio único de la app: código **y** documentos. Encaja con la idea de GRAVITY como "la app general", y el repositorio está prácticamente vacío (README, CLAUDE.md y una copia del contrato). El README de FINANZAS ya preveía juntar los repositorios.
+
+**Condición.** Todo lo necesario para construir vive **en el mismo repositorio que el código**; si no, cada sesión de Claude Code tendría que manejar cuatro repositorios y los punteros de submódulos.
+
+```
+GRAVITY/
+  app/          Flutter: Windows (completa) y Android (mínima)
+  modulos/      presupuesto, alimentacion, habitos, cuidados, asistente
+  supabase/     tablas, reglas por rol, funciones de servidor
+  casa/         configuración de Home Assistant (D9)
+  data/         datos semilla (data/personal/ ignorada por git)
+  docs/
+    DECISIONES.md
+    CONTRATO (v3.0: reglas internas entre módulos)
+    modulos/    diseño de cada módulo (desde FINANZAS y HABITOS; Cuidados y GRAVITY nuevos)
+```
+
+- Un `CLAUDE.md` general y uno por módulo; una sesión puede trabajar en un solo módulo sin perder el contexto común.
+- **FINANZAS y HABITOS:** sus diseños se copian a `GRAVITY/docs/modulos/` y los repositorios quedan como historial (archivados, solo lectura). No se borra nada.
+- **SEGUNDO-CEREBRO:** deja de ser la fuente; queda con un README que apunta a GRAVITY, o se archiva.
+
+**Pendiente.** Confirmar el nombre: la app se llama **GRAVITY** y "Segundo Cerebro" queda como nombre del proyecto.
