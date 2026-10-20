@@ -21,7 +21,9 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D11 | Prioridad Finanzas → Hábitos; funcional primero, pulido después | Confirmada |
 | D12 | Laptop con pantalla principal de GRAVITY tipo JARVIS; teléfono como app normal | Confirmada |
 | D13 | Datos sensibles de Hábitos: cifrados en la nube o solo en el teléfono, a elegir | Confirmada |
-| D14 | Tablet maestra de la casa con cambio de usuario | Confirmada (detalles propuestos) |
+| D14 | Tablet portátil de la casa con cambio de usuario | Confirmada (detalles propuestos) |
+| D15 | Smartwatch | Confirmada (detalles propuestos) |
+| D16 | APIs documentadas con OpenAPI y Swagger UI | Confirmada (detalles propuestos) |
 
 ---
 
@@ -266,6 +268,7 @@ GRAVITY/
 - **Teléfono:** app normal, sin pantalla tipo JARVIS; GRAVITY es una función más (botón de micrófono).
 - **Diseño UX/UI común:** se define en paralelo en `DISENO_UX_UI.md`.
 - **Estilo configurable** (20/oct/2026): varios estilos (futurista, minimalista, claro, arquitectónico, glass, swagger), claro/oscuro automático por hora y personalidad por módulo y submódulo, sin perder una base común. **Voces configurables** por persona. Detalle en `DISENO_UX_UI.md`.
+- **Estilo por defecto: Futurista** (20/oct/2026), con versión de día y de noche. La vista en planta de la tablet se descartó.
 
 ---
 
@@ -284,15 +287,41 @@ GRAVITY/
 
 ---
 
-## D14. Tablet maestra de la casa — confirmada (20/oct/2026; detalles propuestos)
+## D14. Tablet portátil de la casa — confirmada (20/oct/2026; detalles propuestos)
 
-**Decisión.** Además de la laptop y los teléfonos, hay una **tablet Android fija en la casa** (cocina o sala) como uso maestro del hogar. Es la misma app, con diseño para tablet.
+**Decisión.** Además de la laptop y los teléfonos, hay una **tablet Android portátil**, compartida en la casa, que **se lleva a donde se use**. Es la misma app, con diseño para tablet.
 
 **Propuesto**
-- **Modo Casa** en reposo: usa la cuenta de rol **Casa** (D5), sin dinero ni datos clínicos. Muestra lo de hoy en la casa, el menú, la lista de compras, el turno de cuidados con recordatorios genéricos y GRAVITY.
+- **Modo Casa** en reposo: usa la cuenta de rol **Casa** (D5), sin dinero ni datos clínicos. Muestra GRAVITY, lo de hoy en la casa, la cocina, el turno de cuidados con recordatorios genéricos y los avisos.
+- **Contextos** según dónde se use: General, Cocina, Gimnasio y Cuidados. Cambian los gadgets, el tamaño de letra y la personalidad.
 - **Cambio de usuario:** cada persona entra con PIN o huella y ve sus pantallas según su rol; tras 2 minutos sin uso (editable) regresa al modo Casa. La cuidadora y la hermana pueden trabajar su turno desde ahí.
-- **Micrófono propio de GRAVITY en casa:** la tablet permite la conversación libre que las bocinas Xiaomi no permiten (D6). Por definir la palabra de activación con la tablet cargando.
-- **Vista en planta** de la casa como pantalla de inicio (detalle en `DISENO_UX_UI.md`, sección 10).
+- **Micrófono propio de GRAVITY en casa:** botón "Mantén para hablar" y la palabra *"Gravity"* solo mientras carga, para cuidar la batería. Permite la conversación libre que las bocinas Xiaomi no permiten (D6).
+- **Vista en planta:** descartada (20/oct/2026).
 
-**Pendiente.** Qué tablet usar y dónde va; si la vista en planta se dibuja con la planta real de la casa.
+**Pendiente.** Qué tablet usar y si se usará más en horizontal o en vertical.
 
+---
+
+## D15. Smartwatch — confirmada (20/oct/2026; detalles propuestos)
+
+**Decisión.** El sistema contempla un **smartwatch** para pantallas de un vistazo.
+
+**Propuesto, en dos niveles**
+1. **Notificaciones con acciones** (*Hecho*, *Posponer*, *Ya se dio*): salen de las notificaciones del teléfono, funcionan con casi cualquier reloj enlazado y casi no cuestan desarrollo. Disponibles desde que existan las alertas (Fases 2 y 3).
+2. **App propia del reloj** (anillos del día, bici en vivo, SOS antojo, medicamento de la cuidadora, serie y descanso): solo si el reloj es **Wear OS**; va en las ampliaciones.
+
+**Reglas.** Sin montos de dinero en el reloj (solo el semáforo); una pregunta y como máximo dos botones por pantalla; los datos del reloj (pasos, ritmo cardiaco, sueño) entran por Health Connect cuando el reloj los comparte.
+
+**Pendiente.** Marca y modelo del reloj; si la cuidadora usa reloj.
+
+---
+
+## D16. APIs documentadas con OpenAPI y Swagger UI — confirmada (20/oct/2026; detalles propuestos)
+
+**Decisión.** "Swagger" entra de dos formas: como **estilo** (F, con actitud; `DISENO_UX_UI.md`, sección 4) y como **herramienta**: las APIs del sistema se describen en **OpenAPI** y se consultan y prueban con **Swagger UI**.
+
+**Propuesto**
+- **Qué se documenta:** las herramientas de GRAVITY (D1), la base de datos (Supabase, D7), las funciones del servidor (clave de la IA y avisos) y el puente de casa (D9).
+- **Dónde:** en la laptop, en Ajustes › Desarrollador, solo con rol Dueño. La especificación **no se publica en internet**.
+- **Cada operación indica** su rol, si pide confirmación y si nunca pasa por la IA (D3).
+- **Desde la Fase 0:** la especificación crece con cada fase y forma parte de la documentación que leen las sesiones de Claude Code.

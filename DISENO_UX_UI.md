@@ -1,14 +1,14 @@
 # Diseño UX/UI de GRAVITY
 
-> **Versión 0.3 (20/oct/2026), borrador para definir juntos.** Documento común de experiencia y diseño visual de toda la app: la **pantalla principal de GRAVITY en la laptop**, las **pantallas de los módulos**, la **app del teléfono** y la **tablet de la casa**. Las pantallas de cada módulo siguen en sus diseños (FINANZAS, sección 8; HÁBITOS, Anexo G) y deben respetar este documento.
+> **Versión 0.4 (20/oct/2026), borrador para definir juntos.** Documento común de experiencia y diseño visual de toda la app: la **pantalla principal de GRAVITY en la laptop**, las **pantallas de los módulos**, la **app del teléfono**, la **tablet portátil de la casa** y el **smartwatch**. Las pantallas de cada módulo siguen en sus diseños (FINANZAS, sección 8; HÁBITOS, Anexo G) y deben respetar este documento.
 >
-> **(decidido)** = ya lo confirmaste. **(propuesto)** = sugerencia para revisar. Las preguntas para definir están en la sección 20.
+> **(decidido)** = ya lo confirmaste. **(propuesto)** = sugerencia para revisar. Las preguntas para definir están en la sección 22.
 >
 > **Bocetos para comparar** (lienzo privado): [GRAVITY — estilos de pantalla](https://claude.ai/artifact/M4y2F9SJJvqXVKXjDJ7rwT). Datos de ejemplo.
-> - **Laptop, pantalla principal:** A futurista, B minimalista, C claro, D arquitectónico (cianotipo o papel, se cambia en *Tweaks*) y E glass (noche o día).
+> - **Laptop, pantalla principal:** A futurista (**por defecto**), B minimalista, C claro, D arquitectónico (cianotipo o papel, en *Tweaks*) y E glass (noche o día).
 > - **Teléfono:** Hoy del Dueño, Mi turno de la cuidadora, Registrar gasto y Bici en vivo (personalidad sport).
-> - **Módulos y gadgets:** Finanzas › Semana en la laptop y el catálogo de gadgets por módulo.
-> - **Tablet:** maestra de la casa con vista en planta y cambio de usuario.
+> - **Módulos, gadgets y herramientas:** Finanzas › Semana, el catálogo de gadgets y Ajustes › Desarrollador (APIs con Swagger UI).
+> - **Tablet y smartwatch:** modo Casa de la tablet con contextos (noche o día, en *Tweaks*) y cinco pantallas del reloj.
 
 ---
 
@@ -16,14 +16,16 @@
 
 | Tema | Decisión | Origen |
 |---|---|---|
-| Plataformas | Laptop Windows con el sistema completo; teléfono Android con lo mínimo; **tablet de la casa** | D4, D14 |
+| Plataformas | Laptop Windows con el sistema completo; teléfono Android con lo mínimo; **tablet portátil de la casa**; **smartwatch** | D4, D14, D15 |
 | Laptop | Pantalla principal de GRAVITY **tipo JARVIS** | D12 |
 | Teléfono | **App normal**, sin pantalla tipo JARVIS; GRAVITY como botón de micrófono | D12 |
-| Estilo | **Configurable**; el futurista te gusta | 20/oct/2026 |
+| Estilo | **Configurable**; **por defecto, A · Futurista** | 20/oct/2026 |
+| Swagger | **Las dos cosas:** el estilo F "swagger" y la herramienta **Swagger UI** para documentar y probar las APIs | D16 |
 | Claro / oscuro | **Automático según la hora**, además de las opciones fijas | 20/oct/2026 |
-| Personalidad | **Cambia por módulo y submódulo** (p. ej. Finanzas distinto de bici y entrenamiento), sin volverse "tutifruti": personalidad con uso y función | 20/oct/2026 |
+| Personalidad | **Cambia por módulo y submódulo**, sin volverse "tutifruti": personalidad con uso y función | 20/oct/2026 |
 | Gadgets | Medidores, contadores, anillos y relojes en lugar de pantallas planas | 20/oct/2026 |
 | Voces | **Se pueden cambiar** | 20/oct/2026 |
+| Tablet | **Portátil**: se lleva a donde se use. **Sin vista en planta** | D14 |
 | Base | Material 3 | HÁBITOS G.1 |
 | Colores de Hábitos por área | Espiritual violeta, Salud verde, Inglés naranja, Personal azul verdoso, Laboral gris azulado, Hábitos a eliminar terracota (nunca rojo de alarma) | HÁBITOS G.1 |
 | Tono | Cercano y sin culpa: un fallo es un "ajuste", no un error | HÁBITOS G.1 y G.7 |
@@ -36,11 +38,11 @@
 
 ## 2. Principios (propuesto)
 
-1. **Una app, varias formas de uso.** En la laptop se piensa y se planea; en el teléfono se actúa; en la tablet se comparte la casa.
+1. **Una app, varias formas de uso.** En la laptop se piensa y se planea; en el teléfono se actúa; en la tablet se comparte la casa; en el reloj se mira y se confirma.
 2. **Personalidad con propósito.** Cada cambio visual responde al uso: en la bici, números enormes porque se ven de reojo y en movimiento; en Finanzas, calma y precisión.
 3. **Cada persona ve solo lo suyo.** La interfaz se arma según el rol (D5): nada de pantallas vacías ni botones bloqueados por permisos.
 4. **Primero lo de hoy.** Al abrir, lo que toca ahora; el detalle, a un toque o un clic.
-5. **Gadgets antes que tablas en el teléfono y la tablet; tablas completas en la laptop.**
+5. **Gadgets antes que tablas en el teléfono, la tablet y el reloj; tablas completas en la laptop.**
 6. **Siempre se confirma antes de escribir**, sobre todo lo que llega por voz o por GRAVITY.
 7. **Privacidad visible.** El dinero y los datos de cuidados se ocultan con un toque o un atajo.
 8. **Todo tiene estado** vacío, cargando, sin conexión y error, con un mensaje claro y una acción.
@@ -54,7 +56,8 @@
 |---|---|---|---|
 | **Tú, en la laptop** | Escritorio | Planear, revisar y configurar; sesiones largas | Pantalla con mucha información, atajos de teclado, voz, paneles |
 | **Tú, en el teléfono** | Súper, coche, bici, calle | Prisa, una mano, a veces sin señal | Botón "+" siempre visible, registro en segundos, modo de solo audio al manejar |
-| **Cualquiera, en la tablet** | Cocina o sala | De pasada, con las manos ocupadas, varias personas | Lo de la casa a la vista, voz, cambio de usuario rápido |
+| **Tú, en el reloj** | Bici, gimnasio, en movimiento | Un vistazo, una mano o ninguna | Una pregunta por pantalla y como máximo dos botones |
+| **Cualquiera, en la tablet** | Donde se lleve: cocina, gimnasio, recámara de papá, sala | De pasada, con las manos ocupadas, varias personas | Contexto según dónde se use, voz, cambio de usuario rápido |
 | **Pareja** | Teléfono | Lo suyo y el resumen del presupuesto | Igual que el tuyo, pero reducido |
 | **Cuidadora** | Teléfono o tablet, en su turno | Atiende a una persona con Alzheimer, con interrupciones constantes; quizá con poca experiencia en apps | Botones grandes, pocas opciones, lenguaje simple, confirmar en un toque, todo en "Mi turno" |
 | **Hermana** | Teléfono o tablet, los martes | Llega después del turno de la cuidadora | Entrar directo a la entrega de turno |
@@ -69,7 +72,7 @@ El aspecto se arma en **cuatro capas**. Así cada módulo tiene personalidad sin
 | Capa | Qué define | Quién la elige |
 |---|---|---|
 | **1. Base común** | Rejilla y márgenes, posición de la navegación y los botones, tipografía de lectura, iconos, comportamiento (confirmar, deshacer), accesibilidad | Fija: **no cambia nunca** |
-| **2. Estilo** | Superficies, bordes, decoración, tipografía de títulos y números, animación del núcleo | Tú, en Ajustes (global) |
+| **2. Estilo** | Superficies, bordes, decoración, tipografía de títulos y números, animación del núcleo | Tú, en Ajustes (global). **Por defecto: Futurista** |
 | **3. Personalidad del módulo** | Color de acento, gadgets, densidad, ritmo de animación | Automática por módulo y submódulo; se puede fijar a mano (sección 5) |
 | **4. Claro / oscuro** | Fondo y contraste | Automático por hora, del sistema, siempre claro o siempre oscuro |
 
@@ -77,21 +80,21 @@ El aspecto se arma en **cuatro capas**. Así cada módulo tiene personalidad sin
 
 | Estilo | Cómo se ve | Dónde luce más |
 |---|---|---|
-| **A · Futurista (HUD)** | Fondo casi negro, líneas finas cian, anillos que giran, letra técnica | Pantalla principal de GRAVITY |
+| **A · Futurista (HUD) — por defecto** | Noche: fondo casi negro, líneas finas cian, anillos que giran, letra técnica. Día: fondo claro con líneas azul petróleo (ver la tablet en *Tweaks*) | Pantalla principal de GRAVITY, tablet, reloj |
 | **B · Minimalista** | Oscuro o claro, tarjetas redondeadas, círculo que "respira" | Sesiones largas en los módulos |
 | **C · Claro sereno** | Fondo claro, GRAVITY en una franja superior | Uso de día |
-| **D · Arquitectónico** | Retícula de fondo, ejes con globos (A, B, C), cotas como barras de avance, cajetín con proyecto, plano, escala y usuario, flecha de norte. Dos variantes: **cianotipo** (azul con líneas claras) y **papel** (papel con trazo de grafito y acento rojo de corrección) | Laptop y tablet (vista en planta) |
+| **D · Arquitectónico** | Retícula de fondo, ejes con globos (A, B, C), cotas como barras de avance, cajetín con proyecto, plano, escala y usuario, flecha de norte. Variantes **cianotipo** y **papel** | Laptop |
 | **E · Glass** | Paneles translúcidos y esmerilados sobre un fondo de color difuminado; versión de noche y de día | Laptop y tablet |
 | **F · Swagger** | Con actitud: letra grande y condensada, negro y blanco con un color neón, etiquetas tipo sticker | Personalidad sport (bici, entrenamiento) y para quien la quiera global |
 
 **Reglas (propuesto)**
-- **Claro / oscuro automático por hora:** claro de 07:00 a 19:00 por defecto (editable) o según el amanecer y el atardecer. El cambio es suave y nunca a mitad de una acción.
+- **Claro / oscuro automático por hora:** claro de 07:00 a 19:00 por defecto (editable) o según el amanecer y el atardecer. El cambio es suave y nunca a mitad de una acción. Cada estilo tiene su versión de día y de noche.
 - **Excepciones por función:**
   - **Cuidados** usa siempre una variante clara y de alto contraste, sin decoración, sea cual sea el estilo.
   - **La bici** usa siempre alto contraste, por el sol.
 - **Glass en el teléfono:** sin el efecto de esmerilado, que gasta batería y puede hacer lenta la app; se usa una versión translúcida sólida. El esmerilado completo, solo en laptop y tablet.
 - **Cómo se construye sin rehacer:** cada estilo es un juego de valores de diseño (colores, tipografías, formas, sombras, animación, densidad) en el tema central. La personalidad del módulo solo sustituye algunos de esos valores, y las pantallas nunca usan colores fijos. Agregar un estilo nuevo no obliga a tocar pantallas.
-- **Por fases:** la Fase 0 arranca con el sistema de estilos y dos estilos (Futurista y uno claro). Los demás estilos, las personalidades y los gadgets llegan en el Pulido 1 (ROADMAP).
+- **Por fases:** la Fase 0 arranca con el sistema de estilos y el Futurista (día y noche). Los demás estilos, las personalidades y los gadgets llegan en el Pulido 1 (ROADMAP).
 
 ---
 
@@ -107,6 +110,7 @@ El aspecto se arma en **cuatro capas**. Así cada módulo tiene personalidad sin
 | **Hábitos a eliminar** | Empática | Terracota, contador grande, botón SOS siempre visible | Momentos de antojo; sin culpa |
 | **Cuidados** | Clara y cálida | Rosa oscuro, letra y botones grandes, alto contraste | Se usa con interrupciones; no puede haber confusión |
 | **Alimentación / Casa** | Cálida y práctica | Ámbar, recetas paso a paso con letra grande y voz | Se usa cocinando, con las manos ocupadas |
+| **Ajustes › Desarrollador** | Técnica | Estilo Swagger UI con los colores del estilo activo | Consultar y probar APIs (sección 10) |
 
 En Ajustes, cada módulo tiene tres opciones: **Automática** (la de la tabla), **Igual al estilo global** o **Elegir otro estilo**.
 
@@ -114,7 +118,7 @@ En Ajustes, cada módulo tiene tres opciones: **Automática** (la de la tabla), 
 
 ## 6. Gadgets (propuesto)
 
-Cada gadget responde a una pregunta concreta y toma el estilo activo y la personalidad de su módulo. Se pueden poner en la pantalla principal de GRAVITY, en "Hoy" del teléfono, en la tablet y como widgets de Android.
+Cada gadget responde a una pregunta concreta y toma el estilo activo y la personalidad de su módulo. Se pueden poner en la pantalla principal de GRAVITY, en "Hoy" del teléfono, en la tablet, en el reloj y como widgets de Android.
 
 | Gadget | Módulo | Responde a |
 |---|---|---|
@@ -156,7 +160,7 @@ Cada gadget responde a una pregunta concreta y toma el estilo activo y la person
 | **Paneles y gadgets** | Resumen de cada módulo activo; se pueden mover, cambiar u ocultar |
 | **Barra de órdenes** | Texto y voz. En la Fase 0 solo navega (*"abre presupuesto"*); en la Fase 6 conversa con IA |
 | **Barra de módulos** | Abre cada módulo completo |
-| **Atajo global** | Una combinación de teclas abre GRAVITY desde cualquier parte de Windows (sección 13) |
+| **Atajo global** | Una combinación de teclas abre GRAVITY desde cualquier parte de Windows (sección 15) |
 | **Modo privado** | Un atajo oculta montos y datos de cuidados, por si alguien está viendo |
 
 ---
@@ -191,25 +195,55 @@ Cada gadget responde a una pregunta concreta y toma el estilo activo y la person
 
 ---
 
-## 10. Tablet: maestra de la casa (D14)
+## 10. Laptop: Ajustes › Desarrollador, APIs con Swagger UI (D16)
 
-- **Dispositivo:** tablet Android fija en la cocina o la sala, con cargador. Es la misma app, con diseño para tablet.
-- **Modo Casa (al encender y en reposo):** rol Casa (D5). Muestra lo de hoy en la casa, el menú, la lista de compras, el turno de cuidados con recordatorios genéricos y GRAVITY. Sin dinero ni datos clínicos.
-- **Vista en planta** *(propuesto)*: la casa dibujada como plano, y cada cuarto muestra lo suyo (cocina: menú y lista; recámara de papá: turno; estudio: finanzas con candado; gimnasio y patio: entrenamiento y bici). Más adelante se puede dibujar o importar la planta real. Alternativa: vista de lista.
-- **Cambio de usuario:** se toca un nombre y se entra con PIN o huella a las pantallas de esa persona según su rol. Después de 2 minutos sin uso (editable) regresa sola al modo Casa.
-- **Cuidadora y hermana** pueden trabajar su turno desde la tablet ("Mi turno" en grande).
-- **GRAVITY en casa:** la tablet puede ser el **micrófono propio de GRAVITY**, con conversación libre, algo que las bocinas Xiaomi no permiten (D6) *(propuesto)*.
+- **Qué es:** la consola donde se **consultan y prueban las APIs del sistema**, con la herramienta **Swagger UI** y la especificación en formato **OpenAPI**. Se ve con los colores del estilo activo (boceto *Laptop · Desarrollador*).
+- **Grupos:** herramientas de GRAVITY, base de datos, funciones del servidor y puente de casa (Home Assistant).
+- **Cada operación muestra:** método y ruta, qué hace, qué rol la puede usar, si **pide confirmación** y si **nunca pasa por la IA** (dinero, D3).
+- **Probar:** las llamadas se hacen con la sesión del Dueño; nada se ejecuta sin confirmación si escribe datos.
+- **Seguridad:** solo en la laptop y solo con rol Dueño. La especificación **no se publica en internet**.
+- **Para qué sirve:** revisar qué puede hacer GRAVITY, conectar el puente de casa y futuras integraciones, y que cada sesión de Claude Code tenga la API documentada.
 
 ---
 
-## 11. Mapa de pantallas de las fases 0 a 3 (propuesto)
+## 11. Tablet portátil de la casa (D14)
+
+- **Dispositivo:** tablet Android **portátil**, compartida en la casa; se lleva a donde se use. Es la misma app con diseño para tablet, en horizontal y en vertical.
+- **Modo Casa** (al encender y en reposo): rol Casa (D5). Muestra GRAVITY, lo de hoy en la casa, la cocina, el turno de cuidados con recordatorios genéricos y los avisos. Sin dinero ni datos clínicos.
+- **Contextos** *(propuesto)*: arriba se elige dónde se está usando, **General · Cocina · Gimnasio · Cuidados**, y cambian los gadgets, el tamaño de letra y la personalidad. Ejemplos: en Cocina, la receta paso a paso con letra enorme y voz; en Gimnasio, la serie y el descanso; en Cuidados, "Mi turno" (con la sesión de la cuidadora).
+- **Cambio de usuario:** se toca un nombre y se entra con PIN o huella a las pantallas de esa persona según su rol. Después de 2 minutos sin uso (editable) regresa sola al modo Casa.
+- **GRAVITY en la tablet:** botón **"Mantén para hablar"** siempre; la palabra *"Gravity"* solo mientras carga, para no gastar batería *(propuesto)*. Aquí sí hay conversación libre, algo que las bocinas Xiaomi no permiten (D6).
+- **Vista en planta:** descartada.
+
+---
+
+## 12. Smartwatch (D15)
+
+**Principio:** un vistazo y una acción. Cada pantalla responde una pregunta y tiene como máximo dos botones.
+
+| Nivel | Qué incluye | Costo de desarrollo |
+|---|---|---|
+| **1. Notificaciones con acciones** | Los avisos del teléfono llegan al reloj con sus botones (*Hecho*, *Posponer*, *Ya se dio*). Funciona con casi cualquier reloj enlazado al teléfono | Casi nulo: sale de las notificaciones del teléfono |
+| **2. App propia del reloj** | Pantallas y accesos rápidos: anillos del día, bici en vivo, SOS antojo, medicamento de la cuidadora, serie y descanso | Solo si el reloj es **Wear OS**; se construye aparte |
+
+**Pantallas propuestas** (boceto *Smartwatch*): Hoy (anillos), Bici en vivo, notificación con acciones, Cuidadora · medicamento y SOS antojo.
+
+**Reglas (propuesto)**
+- **Sin montos de dinero en el reloj:** solo el semáforo de la semana.
+- La información de cuidados en el reloj de la cuidadora es la de su turno; en el tuyo, la del resumen.
+- Personalidad sport en bici y entrenamiento; Futurista en lo demás.
+- Los datos del reloj (pasos, ritmo cardiaco, sueño) entran por Health Connect cuando el reloj los comparte.
+
+---
+
+## 13. Mapa de pantallas de las fases 0 a 3 (propuesto)
 
 **Laptop (Dueño)**
 
 | Módulo | Pantallas | Fase |
 |---|---|---|
 | GRAVITY | Pantalla principal | 0 |
-| Ajustes | Personas y roles · Apariencia (estilo, claro/oscuro, personalidad por módulo) · Voz · Privacidad (modo privado y datos sensibles, D13) · Copias de seguridad · Notificaciones · Asistente de configuración | 0 |
+| Ajustes | Personas y roles · Apariencia (estilo, claro/oscuro, personalidad por módulo) · Voz · Privacidad (modo privado y datos sensibles, D13) · Copias de seguridad · Notificaciones · **Desarrollador (APIs)** · Asistente de configuración | 0 |
 | Finanzas | Tablero · Semana · Movimientos · Cuentas · Ingresos · Gastos y categorías · Importar datos | 1 |
 | Finanzas | Deudas · Ahorro · Alertas | 2 |
 | Hábitos | Hoy · Agenda · Objetivos · Hábitos a eliminar · Espiritual (lector, planes, devocional, oración) · Progreso · Revisión semanal | 3 |
@@ -225,29 +259,32 @@ Cuidados, Casa y Alimentación aparecen cuando llegan sus fases (5, 6 y 7).
 | Cuidador (Fase 5) | **Mi turno:** entrega de turno, siguiente medicamento, comidas, gasto de cuidado · **Medicamentos** · **Comidas** · **Bitácora** |
 | Familiar | Hoy · Hábitos · Más |
 
-**Tablet:** modo Casa, cambio de usuario y, por usuario, las pantallas del teléfono con diseño de tablet.
+**Tablet:** modo Casa con contextos, cambio de usuario y, por usuario, las pantallas del teléfono con diseño de tablet.
+
+**Reloj:** nivel 1 desde que existan las notificaciones (Fases 2 y 3); nivel 2 en las ampliaciones.
 
 ---
 
-## 12. Flujos clave (propuesto)
+## 14. Flujos clave (propuesto)
 
 | # | Flujo | Pasos | Meta |
 |---|---|---|---|
 | F1 | **Registrar un gasto** (teléfono) | (+) → Gasto → monto (el teclado ya está abierto) → categoría (la última preseleccionada y 5 sugeridas) → cuenta (la última usada) → Guardar → aviso *"Guardado · Deshacer"* | Menos de 10 s |
-| F2 | **Marcar un hábito** | Hoy → *Hecho* (o deslizar) → la racha se actualiza, con deshacer. También desde la notificación | 3 toques o menos |
-| F3 | **SOS "Tengo un antojo"** | Hoy, (+) o widget → temporizador con una alternativa → *"¿Lo superaste?"* Sí / No, sin culpa | Al alcance en 1 toque |
+| F2 | **Marcar un hábito** | Hoy → *Hecho* (o deslizar) → la racha se actualiza, con deshacer. También desde la notificación o el reloj | 3 toques o menos |
+| F3 | **SOS "Tengo un antojo"** | Hoy, (+), widget o reloj → temporizador con una alternativa → *"¿Lo superaste?"* Sí / No, sin culpa | Al alcance en 1 toque |
 | F4 | **Orden a GRAVITY** (laptop) | Ctrl+Espacio → escribir → sugerencias mientras escribes → Enter. Si no entiende, muestra opciones parecidas. Desde la Fase 6 conversa, y toda escritura pasa por la tarjeta de confirmación | — |
 | F5 | **Revisión semanal de finanzas** (laptop) | Semana → Revisión semanal → planeado contra real → desvíos → ajustar la siguiente semana → confirmar el abono extra o el ahorro | Unos 3 min (FINANZAS 5.9 bis) |
 | F6 | **Invitar a una persona** (laptop) | Ajustes → Personas y roles → Invitar → nombre y rol → invitación por correo → instala la app y entra → ve solo lo de su rol. Dar de baja: un clic y confirmación; pierde el acceso al instante | — |
 | F7 | **Cambio urgente de medicamento** (Fase 5) | Teléfono del Dueño: Más → Cuidados → medicamento → suspender o agregar → nota → confirmar → aviso al instante a la cuidadora de turno, que marca *Enterada* | — |
-| F8 | **Cambiar de usuario en la tablet** | Tocar el nombre → PIN o huella → pantallas de esa persona → 2 min sin uso → modo Casa | Menos de 5 s |
+| F8 | **Usar la tablet** | Elegir contexto (Cocina, Gimnasio, Cuidados) → tocar un nombre → PIN o huella → pantallas de esa persona → 2 min sin uso → modo Casa | Menos de 5 s |
 | F9 | **Cambiar el estilo** | Ajustes → Apariencia → estilo (vista previa en vivo) → claro/oscuro (automático por hora) → personalidad por módulo | — |
+| F10 | **Probar una API** (laptop) | Ajustes → Desarrollador → grupo → operación → *Probar* → ver la respuesta | — |
 
 **Sin señal:** lo registrado se guarda en el teléfono con el aviso *"Guardado en el teléfono; se sube al volver la señal"*.
 
 ---
 
-## 13. Atajos de teclado en la laptop (propuesto)
+## 15. Atajos de teclado en la laptop (propuesto)
 
 | Atajo | Acción |
 |---|---|
@@ -262,26 +299,26 @@ Todos se pueden cambiar en Ajustes.
 
 ---
 
-## 14. Voz y personalidad de GRAVITY
+## 16. Voz y personalidad de GRAVITY
 
 - **Voces configurables (decidido):** en Ajustes → Voz se elige la voz (de las disponibles en Windows, en Android o en el proveedor de voz), la velocidad y el tono. **Cada persona elige la suya**; en la tablet, la voz cambia con el usuario activo, y el modo Casa tiene su propia voz.
 - **Trato (propuesto):** de tú con el Dueño, la pareja y los familiares. En Cuidados, textos **impersonales** (*"¿Cómo comió?"*, *"Marcar como leída"*), para no tener que elegir entre tú y usted con la cuidadora.
 - **Carácter (propuesto):** tranquila, breve y precisa; sin culpa; el humor ligero viene apagado y se puede activar.
 - **Siempre dice lo que hizo** (*"Listo: registré $85 en Alimentación"*) y pide confirmación antes de escribir.
 - **Nunca dice montos en voz alta** con el modo privado activo, en el modo Casa ni por las bocinas (D6).
-- **Activación:** en la laptop, el atajo o la palabra *"Gravity"*; en la tablet, la palabra *"Gravity"* (por definir); en las bocinas, *"Hey Google"* con las frases fijas (D6).
+- **Activación:** en la laptop, el atajo o la palabra *"Gravity"*; en la tablet, *"Mantén para hablar"* y la palabra solo mientras carga; en las bocinas, *"Hey Google"* con las frases fijas (D6).
 
 ---
 
-## 15. Notificaciones (propuesto)
+## 17. Notificaciones (propuesto)
 
-| Tipo | En la pantalla bloqueada | Al abrir |
+| Tipo | En la pantalla bloqueada y el reloj | Al abrir |
 |---|---|---|
 | Pago próximo | *"Tienes un pago próximo"* | Detalle con monto |
 | Categoría excedida | *"Revisa una categoría"* | Detalle |
-| Hábito | *"Inglés · 20:00"* | — |
+| Hábito | *"Inglés · 20:00"* con *Hecho* y *Posponer* | — |
 | Hábito sensible (cigarrillo, azúcar) | *"Recordatorio"* | Detalle |
-| Medicamento (cuidadora de turno) | *"Medicamento de las 20:00"* | Detalle |
+| Medicamento (cuidadora de turno) | *"Medicamento de las 20:00"* con *Ya se dio* | Detalle |
 | Cambio urgente (cuidadora de turno) | *"Hay una indicación nueva en Cuidados"* | Detalle |
 
 - Máximo 3 avisos no críticos al día y horas silenciosas de 22:00 a 07:00 (FINANZAS decisión 68).
@@ -289,21 +326,21 @@ Todos se pueden cambiar en Ajustes.
 
 ---
 
-## 16. Sistema visual (por definir)
+## 18. Sistema visual (por definir)
 
 | Elemento | Propuesta | Nota |
 |---|---|---|
-| Color de GRAVITY | Cian (#35d4f0 en los bocetos) | Pregunta 2 |
+| Color de GRAVITY | Cian (#35d4f0) de noche; azul petróleo (#0a7f99) de día | Estilo por defecto |
 | Color por módulo | Finanzas índigo, Cuidados rosa oscuro, Alimentación ámbar, sport neón; Hábitos conserva sus colores por área | Sección 5 |
 | Semáforo | Verde, ámbar y rojo en dinero y medicamentos; verde, ámbar y terracota en hábitos | El rojo, solo para alertas reales |
 | Tipografía | Por estilo: Chakra Petch e IBM Plex (A), Manrope (B), DM Sans (C), Space Grotesk e IBM Plex Mono (D), Plus Jakarta Sans (E), Anton (F, números y títulos). Lectura y teléfono: Inter. Números de ancho fijo en montos | — |
-| Iconos | Sobrios, de línea | Pregunta 7 |
+| Iconos | Sobrios, de línea | Pregunta 2 |
 | Montos | Formato de México: `$1,234.50`; ocultables | — |
-| Densidad | Compacta en la laptop, cómoda en el teléfono, grande en la tablet | — |
+| Densidad | Compacta en la laptop, cómoda en el teléfono, grande en la tablet, mínima en el reloj | — |
 
 ---
 
-## 17. Componentes compartidos (propuesto)
+## 19. Componentes compartidos (propuesto)
 
 - **Tarjeta de resumen de módulo** y **gadgets** (sección 6).
 - **Tarjeta de confirmación:** cada escritura que llega por voz o por GRAVITY se muestra antes de guardarse.
@@ -313,52 +350,52 @@ Todos se pueden cambiar en Ajustes.
 - **Fila con deslizar:** hecho, posponer, omitir.
 - **Hoja inferior** para detalles sin salir de la pantalla.
 - **Aviso urgente de cuidados:** destacado, para cambios de medicamento.
-- **Selector de usuario** (tablet).
+- **Selector de usuario y selector de contexto** (tablet).
+- **Operación de API** con método, ruta, rol y prueba (Desarrollador).
 - **Estado vacío** con una sola acción sugerida.
 
 ---
 
-## 18. Accesibilidad y uso seguro
+## 20. Accesibilidad y uso seguro
 
 - Zonas táctiles de 48 dp o más, buen contraste, letra ajustable y lector de pantalla.
-- Nada que obligue a mirar la pantalla al manejar o en la bici (modo de solo audio).
+- Nada que obligue a mirar la pantalla al manejar o en la bici (modo de solo audio y reloj con un vistazo).
 - Para el rol Cuidador, letra grande por defecto *(propuesto)*.
 - Las animaciones se detienen si el sistema tiene activada la opción de reducir movimiento.
 - Ningún estilo puede bajar el contraste mínimo: si un estilo no lo cumple en un módulo, ese módulo usa su variante de alto contraste.
 
 ---
 
-## 19. Privacidad en pantalla
+## 21. Privacidad en pantalla
 
 - Montos ocultables y modo privado en la laptop.
 - Modo Casa en la tablet sin dinero ni datos clínicos; lo personal solo tras PIN o huella.
-- Notificaciones discretas en dinero, hábitos sensibles y cuidados (sección 15).
+- Sin montos en el reloj.
+- Notificaciones discretas en dinero, hábitos sensibles y cuidados (sección 17).
 - PIN o huella en el teléfono; en la laptop, GRAVITY se bloquea tras un rato sin uso *(propuesto)*.
 
 ---
 
-## 20. Preguntas para definir juntos
+## 22. Preguntas para definir juntos
 
-**Estilo**
-1. **Swagger:** lo interpreté como un estilo "con actitud" (letra grande y condensada, neón, etiquetas tipo sticker). ¿Es lo que buscabas, o te referías a la herramienta *Swagger UI* (documentación de APIs)?
-2. ¿Qué estilo quieres **por defecto** en la laptop: A futurista, D arquitectónico (cianotipo o papel) u otro?
-3. ¿Te gusta la **vista en planta** para la tablet, o prefieres una vista de lista?
-4. **Núcleo central:** ¿anillos que giran (A), plano con ejes (D), esfera de vidrio (E) u otra forma?
+**Reloj y tablet**
+1. **¿Qué smartwatch tienes (marca y modelo)?** Define si se puede hacer el nivel 2 (Wear OS). ¿La cuidadora usa reloj?
+2. ¿Iconos sobrios como en los bocetos, o prefieres emojis?
+3. **Tablet:** ¿ya tienes una? ¿La usarías más en horizontal o en vertical? ¿Te sirven los contextos General, Cocina, Gimnasio y Cuidados, o cambias alguno?
+
+**GRAVITY**
+
+4. **Núcleo central:** ¿anillos que giran (A) u otra forma?
 5. **Paneles al abrir la laptop:** ¿hoy, finanzas, hábitos, cuidados, avisos? ¿Agregas clima, correo u otro?
 6. ¿GRAVITY te saluda en voz alta al encender la laptop?
 
-**Teléfono, tablet y colores**
+**Colores, cuidadora y atajos**
 
-7. ¿Iconos sobrios como en los bocetos, o prefieres emojis?
-8. Tamaño de letra cómodo para ti, para la lectura de la Biblia y para la cuidadora.
-9. ¿Algún color que te guste o quieras evitar?
-10. ¿Dónde va la tablet: cocina o sala? ¿Ya tienes una o hay que elegirla?
-
-**Cuidadora y atajos**
-
-11. ¿Qué tanto usa apps la cuidadora? ¿Letra grande desde el inicio?
-12. En el teléfono de la cuidadora, ¿la app se ve con el nombre "GRAVITY" o con otro más sencillo?
-13. ¿Te sirven los atajos de la sección 13?
+7. Tamaño de letra cómodo para ti, para la lectura de la Biblia y para la cuidadora.
+8. ¿Algún color que te guste o quieras evitar?
+9. ¿Qué tanto usa apps la cuidadora? ¿Letra grande desde el inicio?
+10. En el teléfono de la cuidadora, ¿la app se ve con el nombre "GRAVITY" o con otro más sencillo?
+11. ¿Te sirven los atajos de la sección 15?
 
 *Los roles y permisos financieros entre miembros (albacea, confirmaciones, qué registra la pareja) no son de UX/UI: se definen en la especificación de Finanzas.*
 
@@ -371,3 +408,4 @@ Todos se pueden cambiar en Ajustes.
 | 0.1 | 20/oct/2026 | Borrador inicial: lo ya decidido, principios, personas, pantalla principal de la laptop, navegación del teléfono por rol, sistema visual y preguntas |
 | 0.2 | 20/oct/2026 | Bocetos A, B y C y recomendación de estilo; pantalla dentro de un módulo; mapa de pantallas de las fases 0 a 3; flujos clave; atajos; voz y personalidad de GRAVITY; notificaciones |
 | 0.3 | 20/oct/2026 | Estilo configurable en cuatro capas; estilos D arquitectónico, E glass y F swagger; claro/oscuro automático por hora; personalidad por módulo y submódulo; gadgets; tablet maestra de la casa con cambio de usuario; voces configurables; la pregunta sobre la pareja pasa a la especificación de Finanzas |
+| 0.4 | 20/oct/2026 | Futurista por defecto (con versión de día); Swagger como estilo y como herramienta (Ajustes › Desarrollador, D16); tablet portátil con contextos y sin vista en planta; smartwatch en dos niveles (D15) |
