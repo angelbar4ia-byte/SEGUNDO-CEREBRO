@@ -15,7 +15,7 @@
 >
 > Lo marcado **(propuesto)** no está confirmado por el dueño del proyecto y debe aprobarse antes de implementarse.
 
-> **Aviso (20/oct/2026).** Se decidió una **sola app modular** con Cuidados como módulo. Esto cambia las secciones 2, 6, 7 y 9. Antes de programar, leer `DECISIONES.md` (manda sobre esta versión donde se contradigan) hasta que salga la versión 3.0.
+> **Aviso (20/oct/2026).** Se decidió una **sola app modular** con Cuidados como módulo, GRAVITY con acceso al dinero por rol (sin IA en la nube) y una versión de escritorio para Windows. Esto cambia las secciones 1, 2, 6, 7, 9 y 10. Antes de programar, leer `DECISIONES.md` (manda sobre esta versión donde se contradigan) hasta que salga la versión 3.0.
 
 ---
 

@@ -6,6 +6,17 @@ Estados: **confirmada** (aprobada por el dueño del proyecto), **propuesta** (fa
 
 Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CONEXION_APPS.md` (siguiente versión: 3.0). Mientras tanto, **este archivo manda sobre el contrato v2.0** donde se contradigan.
 
+| # | Decisión | Estado |
+|---|---|---|
+| D1 | Una sola app modular | Confirmada |
+| D2 | Cuidados entra como módulo | Confirmada |
+| D3 | GRAVITY sí usa dinero, por rol y sin IA en la nube | Confirmada (cuidados: propuesta) |
+| D4 | Teléfono y laptop Windows; GRAVITY controla la laptop | Confirmada |
+| D5 | Roles | Propuesta |
+| D6 | Bocinas, Alexa y Google | Propuesta |
+| D7 | Servidor: Firebase con plan Blaze | Pendiente (recomendada la opción A) |
+| D8 | Reglas para controlar la laptop | Propuesta |
+
 ---
 
 ## D1. Una sola app modular — confirmada (20/oct/2026)
@@ -43,34 +54,82 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 - Gastos de cuidado y necesidades de alimentación entran a Presupuesto **con confirmación** (sección 6).
 - Acceso por rol y con consentimiento de quien representa a la persona; todo cambio queda en bitácora.
 
-**Pendiente.** Si GRAVITY puede usar datos de cuidados (p. ej. recordar un medicamento) → D3. Si los datos clínicos se sincronizan en la nube (necesario si hay más de un cuidador) → D4.
+**Pendiente.** Si los datos clínicos se sincronizan en la nube (necesario si hay más de un cuidador) o se quedan solo en el dispositivo.
 
 ---
 
-## D3. GRAVITY, dinero y datos de cuidados — pendiente
+## D3. GRAVITY y el dinero — confirmada (20/oct/2026)
 
-**Pregunta.** ¿GRAVITY puede usar dinero y datos de cuidados **dentro del dispositivo** (respuestas calculadas en el teléfono o la laptop, p. ej. *"te quedan $X en súper"*, *"medicamento a las 8:00"*) **sin enviarlos nunca al modelo de IA en la nube**?
+**Decisión.** GRAVITY **sí** puede usar datos de dinero, **con restricción por rol** (D5) y **sin enviarlos nunca al modelo de IA en la nube**.
 
-- **Sí:** las herramientas de esos módulos entregan su respuesta directo a la pantalla o a la voz, sin pasar por el modelo en la nube.
-- **No:** quedan totalmente fuera de GRAVITY, como en el contrato v2.0.
+- El modelo en la nube solo entiende la pregunta y elige la herramienta. La herramienta de Presupuesto entrega su respuesta **directo a la pantalla o a la voz**, sin pasar por el modelo: el modelo nunca ve cifras, cuentas, precios ni comercios.
+- Análisis con IA de los datos de dinero (p. ej. *"¿en qué puedo ahorrar?"*): solo con un modelo de IA **local en la laptop** (opción futura), nunca en la nube.
+- **Nunca por bocinas** (D6).
 
-Opción futura relacionada: un modelo de IA local en la laptop (D4) podría analizar esos datos sin que salgan de casa.
+**Cuidados — propuesta.** Misma regla que el dinero (solo dentro del dispositivo, solo roles autorizados). En bocinas, solo recordatorios **genéricos**, sin nombre del medicamento ni de la persona (p. ej. *"Hora del medicamento de las 8:00"*).
 
 ---
 
-## D4. Teléfono y laptop — propuesta
+## D4. Teléfono y laptop — confirmada (20/oct/2026)
 
-**Propuesta.** Los datos viven en **Firebase** (punto de encuentro); el **teléfono y la laptop son dos pantallas de la misma app**. Ninguna depende de que la otra esté encendida, y ambas funcionan sin conexión y se sincronizan al volver.
+**Decisión.** Los datos viven en la nube (servidor: D7); el **teléfono y la laptop son dos pantallas del mismo sistema**. Ninguna depende de que la otra esté encendida.
 
-| | Teléfono (lo diario) | Laptop (planear y analizar) |
+- **Laptop: Windows.** GRAVITY en la laptop **controla la computadora** (reglas en D8), así que es una **app de escritorio para Windows**, del mismo código Flutter.
+- **Restricción técnica:** el SDK oficial de Firebase para Flutter en Windows es *"for development only. Production on Windows is not supported"* ([FlutterFire](https://github.com/firebase/flutterfire)). Por eso la app de Windows **no se conecta directo a la base de datos**: usa las herramientas del servidor (D7). Las pantallas de los módulos en la laptop se usan en la **versión web** (navegador), donde Firebase sí es para producción; GRAVITY puede abrirlas.
+
+| | Teléfono (lo diario) | Laptop (planear, analizar, controlar) |
 |---|---|---|
-| Presupuesto y Alimentación | Gasto al momento, lista de compras en el súper, qué como hoy | Presupuesto del mes, estados de cuenta, menú semanal, recetas, reportes |
-| Hábitos y Objetivos | Marcar hábitos y comidas, ejercicio y bici (GPS), sueño, peso y agua (Health Connect) | Revisión semanal, objetivos |
-| Cuidados | Medicamentos a tiempo, bitácora del cuidador | Citas, resumen, costos |
-| GRAVITY | Voz en cualquier lugar, recordatorios | Texto y voz en el escritorio, tareas largas |
+| Presupuesto y Alimentación | Gasto al momento, lista de compras en el súper, qué como hoy | Presupuesto del mes, estados de cuenta, menú semanal, recetas, reportes (versión web) |
+| Hábitos y Objetivos | Marcar hábitos y comidas, ejercicio y bici (GPS), sueño, peso y agua (Health Connect) | Revisión semanal, objetivos (versión web) |
+| Cuidados | Medicamentos a tiempo, bitácora del cuidador | Citas, resumen, costos (versión web) |
+| GRAVITY | Voz en cualquier lugar, recordatorios | App de Windows: voz y texto, control de la laptop, avisos a bocinas Google (D6) |
 
-**Por qué no la laptop como centro que alimenta al teléfono.** La laptop se apaga o se queda en casa; lo diario (y Health Connect, que solo existe en el teléfono) pasa en el teléfono; exponer la laptop a internet para que el teléfono la alcance agrega riesgo y trabajo.
+---
 
-**Pendiente.**
-- Qué debe hacer GRAVITY en la laptop. Si solo es usar los módulos: versión web en el navegador. Si debe controlar la computadora (programas, archivos, correo): app de escritorio, y hay que definir el sistema operativo.
-- Si los datos clínicos de cuidados se sincronizan en la nube o se quedan solo en el dispositivo (D2).
+## D5. Roles — propuesta
+
+| Rol | Quién | Módulos | Dinero en GRAVITY | Cuidados |
+|---|---|---|---|---|
+| **Dueño** | El usuario | Todos | Completo | Completo |
+| **Co-administrador** *(opcional)* | Por definir | Por definir | Solo lectura del presupuesto | Según consentimiento |
+| **Familiar** | Otros integrantes | Hábitos y su parte de Alimentación | No | No |
+| **Cuidador** | Quien atiende a la persona bajo cuidado | Cuidados | Solo los gastos de cuidado que registra | Su parte |
+| **Casa** | Bocinas compartidas (D6) | Recetas, lista de compras, recordatorios generales | No | Solo recordatorios genéricos |
+
+- Los roles se validan **en el servidor** (reglas de la base de datos), no solo en la pantalla.
+- La voz **no identifica de forma segura** a una persona: las bocinas siempre tienen el rol **Casa**.
+
+---
+
+## D6. Bocinas, Alexa y Google — propuesta
+
+| Vía | Qué permite | Límites |
+|---|---|---|
+| **Bocina Bluetooth** o la del teléfono/laptop | GRAVITY habla con su propia voz; todo lo que el rol permita | Ninguno nuevo |
+| **Alexa** (skill propia "Gravity", español de México) | Dos sentidos: receta paso a paso (*"Alexa, pídele a Gravity el siguiente paso"*), recomendaciones de comida, lista de compras; recordatorios en el Echo con permiso del usuario ([API de recordatorios](https://developer.amazon.com/en-US/docs/alexa/smapi/alexa-reminders-overview.html)) | Necesita servidor (D7). Todo lo dicho pasa por Amazon → rol **Casa**. A verificar: funcionamiento con Alexa+ |
+| **Google / Nest** | Solo avisos de un sentido: la app de Windows envía el audio a la bocina por la red de casa (Google Cast) | Google no ofrece hoy forma pública de crear acciones propias para sus bocinas ([Gemini built in](https://9to5google.com/2026/05/21/gemini-built-in-will-bring-google-home-ai-to-more-third-party-speakers-this-year/) es para fabricantes). Requiere la laptop encendida y en la misma red. A verificar con una prueba |
+
+- **Orden:** Bluetooth (sin costo extra) → Alexa → Google.
+- **Nada de dinero ni datos clínicos por bocinas**; recordatorios de cuidados solo genéricos (D3).
+
+---
+
+## D7. Servidor — pendiente (recomendada la opción A)
+
+**Por qué ahora hace falta un servidor.** (1) La clave de la IA no puede ir dentro de las apps (contrato v2.0, sección 9.5). (2) La skill de Alexa necesita una dirección en internet que le responda. (3) La app de Windows y Alexa necesitan las herramientas de GRAVITY con roles. (4) Recordatorios programados. El plan **Spark de Firebase no permite funciones de servidor**.
+
+- **A (recomendada): Firebase con plan Blaze.** Se conservan los diseños de FINANZAS y HÁBITOS y el **modo sin conexión del teléfono**. Funciones de servidor (Cloud Functions) para el proxy de IA, la skill de Alexa, las herramientas de GRAVITY con roles y los recordatorios. Blaze pide tarjeta; el uso personal suele quedar dentro de la cuota gratuita. Se configura una alerta de presupuesto.
+- **B: cambiar a Supabase.** Un solo SDK para Android, web y Windows; roles nativos en la base de datos; funciones de servidor en el plan gratuito. Pero el teléfono pierde el modo sin conexión integrado (habría que agregar una capa local) y hay que revisar los diseños de FINANZAS y HÁBITOS.
+
+**Arquitectura con la opción A.** Las pantallas del teléfono usan la base de datos directo (sin conexión incluida). **Todos los GRAVITY** (teléfono, Windows, Alexa) usan **las mismas herramientas del servidor**, donde se aplican los roles (D5) y la regla de que el dinero no pasa por la IA en la nube (D3). Las acciones sobre la laptop (D8) se ejecutan en la propia laptop.
+
+---
+
+## D8. Control de la laptop — propuesta
+
+- **Lista cerrada de acciones** (p. ej. abrir programas y archivos, buscar archivos, leer y redactar correos, abrir la versión web de los módulos). Lo que no está en la lista no se puede hacer.
+- **Confirmación** antes de enviar, borrar, mover, instalar o pagar. GRAVITY **nunca** opera banca en línea ni compras.
+- Lo que GRAVITY **lee** (correos, páginas web, archivos) es información, **nunca órdenes**: si un correo dice "borra tal carpeta", no se ejecuta.
+- Bitácora de todas las acciones.
+
+**Pendiente.** La lista concreta de acciones: qué programas, qué correo (Gmail u Outlook), calendario, etc.
