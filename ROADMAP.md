@@ -1,6 +1,6 @@
 # Roadmap de GRAVITY (proyecto Segundo Cerebro)
 
-> **Versión 0.1 (20/oct/2026), borrador para revisar.** Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
+> **Versión 0.2 (20/oct/2026), aprobada.** La construcción **empieza cuando el dueño del proyecto dé la orden**. Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
 >
 > Este archivo vive en la raíz de SEGUNDO-CEREBRO mientras se confirma D10; después pasa a `GRAVITY/docs/`.
 
@@ -29,12 +29,12 @@
 | **2** | Finanzas MVP 2 | Ver deudas y compromisos, apartar ahorro y recibir alertas |
 | **3** | Hábitos MVP | Objetivos, Hoy, cigarrillo y azúcar, agenda, espiritual y revisión semanal |
 | **4** | Pulido 1 | Finanzas y Hábitos con el diseño UX/UI y los ajustes del uso real |
-| 5 *(propuesto)* | Cuidados | Turnos, medicamentos, comidas de papá, bitácora y entrega de turno |
-| 6 *(propuesto)* | GRAVITY asistente | Conversación con IA, voz, control de la laptop y bocinas Xiaomi |
-| 7 *(propuesto)* | Alimentación | Menús, recetas, lista de compras y precios |
-| 8+ *(propuesto)* | Ampliaciones | Lo demás de Finanzas, Hábitos y GRAVITY, por bloques |
+| **5** | Cuidados | Turnos, medicamentos, comidas de papá, bitácora y entrega de turno |
+| **6** | GRAVITY asistente | Conversación con IA, voz, control de la laptop y bocinas Xiaomi |
+| **7** | Alimentación | Menús, recetas, lista de compras y precios |
+| 8+ | Ampliaciones | Lo demás de Finanzas, Hábitos y GRAVITY, por bloques (orden por definir) |
 
-Las fases 0 a 4 siguen la prioridad que definiste. El orden de la 5 en adelante es una propuesta (pregunta 1 de la sección 10).
+Orden de las fases 0 a 7 confirmado el 20/oct/2026 (sección 10).
 
 ---
 
@@ -107,15 +107,15 @@ Base: diseño de HÁBITOS v1.18, Anexo H, etapas 1 a 5 (la etapa 0 ya está cubi
 | Núcleo: objetivos (asistente SMART), Hoy, registro, rachas y carga del día | Crear y ajustar objetivos; ver el día | **Hoy:** marcar, posponer, omitir |
 | Hábitos a eliminar: cigarrillo y azúcar (línea base, fases, Día D) | Configurar el plan; ver patrones | Registro en un toque; **SOS "Tengo un antojo"** |
 | Agenda y asistente de configuración | Agenda completa y asistente | Ver el día; recordatorios con acciones |
-| Espiritual (MVP): lector, plan de lectura, devocional y oración | Completo | Lector, devocional y oración *(por confirmar, pregunta 3)* |
+| Espiritual (MVP): lector, plan de lectura, devocional y oración | Completo | Lector, devocional y oración |
 | Progreso y revisión semanal (sábados) | Revisión y gráficas | Aviso y resumen |
 
-Algunas funciones de Hábitos se usan **en el momento** y por eso van en el teléfono aunque no sean "lo mínimo": el SOS, el registro de consumo y, si lo confirmas, la lectura.
+Algunas funciones de Hábitos se usan **en el momento** y por eso van en el teléfono aunque no sean "lo mínimo": el SOS, el registro de consumo y la lectura espiritual (lector, devocional y oración).
 
 **Aceptación:** los criterios de las etapas 1 a 5 del Anexo H y de las pantallas G.10.1 (Hoy) y G.10.3 (panel de hábito a eliminar).
 
 **Decisiones de esta fase**
-- **Diario de oración y hábitos sensibles.** El diseño dice que el diario "no se envía a ningún servicio", pero con la nube compartida (D7) quedaría guardado en Supabase. Hay dos opciones: cifrarlo en el teléfono antes de subirlo (solo tú lo puedes leer, también en la laptop) o dejarlo solo en el teléfono (pregunta 4).
+- **Diario de oración y hábitos sensibles: los dos modos (D13).** Cada tipo de dato sensible se puede guardar **cifrado en la nube** (se cifra en el teléfono antes de subirlo; solo tú lo lees, también en la laptop) o **solo en el teléfono** (no sale del dispositivo). Se elige en Ajustes; el valor por defecto se fija en la especificación de esta fase.
 - **Licencias de la Biblia:** se arranca con versiones de dominio público (RVR1909 y KJV) mientras se resuelve RVR1960 y NVI (Anexo H, etapa 4).
 
 ---
@@ -129,7 +129,7 @@ Algunas funciones de Hábitos se usan **en el momento** y por eso van en el tel�
 
 ---
 
-## 8. Fases siguientes (orden propuesto)
+## 8. Fases siguientes (orden confirmado)
 
 ### Fase 5 — Cuidados (funcional)
 - **Teléfono (cuidadoras):** mi turno y entrega de turno, horario de medicamentos y marcar los que ya se dieron, comidas de papá (comió, comió poco, rechazó), bitácora y gastos de cuidado.
@@ -164,12 +164,16 @@ Por bloques, cada uno con su pasada funcional y su pulido.
 
 ---
 
-## 10. Preguntas
+## 10. Respuestas del dueño del proyecto (20/oct/2026)
 
-1. **Después de Hábitos:** propongo Cuidados → GRAVITY asistente → Alimentación. ¿Lo dejamos así o cambias algo? Por ejemplo, adelantar GRAVITY o meter Alimentación en las prioridades de Finanzas.
-2. **Finanzas prioritario:** ¿MVP 1 y 2 son los submódulos que tienes en mente? ¿Agregas o quitas alguno, como la conciliación de estados de cuenta o el simulador de deudas?
-3. **Hábitos en el teléfono:** además del SOS y los registros, ¿quieres el lector bíblico, el devocional y la oración en el teléfono?
-4. **Diario de oración y hábitos sensibles:** ¿cifrados en la nube (se ven en la laptop) o solo en el teléfono?
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | Orden después de Hábitos | **Sí:** Cuidados → GRAVITY asistente → Alimentación |
+| 2 | Submódulos prioritarios de Finanzas | **MVP 1 y MVP 2**, tal como están en las fases 1 y 2 |
+| 3 | Lectura espiritual en el teléfono | **Sí:** lector bíblico, devocional y oración también en el teléfono |
+| 4 | Diario de oración y hábitos sensibles | **Ambos modos:** cifrado en la nube o solo en el teléfono, a elegir (D13) |
+
+**Siguiente paso:** la construcción empieza con la Fase 0 cuando el dueño del proyecto dé la orden. Mientras tanto se trabaja en `DISENO_UX_UI.md`.
 
 ---
 
@@ -178,3 +182,4 @@ Por bloques, cada uno con su pasada funcional y su pulido.
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 0.1 | 20/oct/2026 | Primera versión: prioridad Finanzas → Hábitos, funcional primero y pulido después, pantalla principal de GRAVITY en la laptop y app normal en el teléfono |
+| 0.2 | 20/oct/2026 | Aprobado: orden de las fases 5 a 7, Finanzas MVP 1 y 2 como prioritarios, lectura espiritual en el teléfono y los dos modos para datos sensibles (D13). La construcción espera la orden de inicio |

@@ -20,6 +20,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D10 | Todo el código y los documentos en el repositorio GRAVITY | Propuesta |
 | D11 | Prioridad Finanzas → Hábitos; funcional primero, pulido después | Confirmada |
 | D12 | Laptop con pantalla principal de GRAVITY tipo JARVIS; teléfono como app normal | Confirmada |
+| D13 | Datos sensibles de Hábitos: cifrados en la nube o solo en el teléfono, a elegir | Confirmada |
 
 ---
 
@@ -251,7 +252,8 @@ GRAVITY/
 
 ## D11. Prioridad y forma de construir — confirmada (20/oct/2026)
 
-- **Orden:** primero los submódulos prioritarios de **Finanzas**, después los módulos prioritarios de **Hábitos**; lo demás después (orden propuesto en `ROADMAP.md`).
+- **Orden:** Finanzas (MVP 1 y 2) → Hábitos (MVP) → Pulido 1 → Cuidados → GRAVITY asistente → Alimentación → ampliaciones. Confirmado el 20/oct/2026.
+- **Inicio:** la construcción empieza cuando el dueño del proyecto dé la orden.
 - **Funcional primero, pulido después:** cada módulo se construye primero funcional y luego se pule con el diseño UX/UI y lo aprendido al usarlo.
 - Detalle por fases en `ROADMAP.md`.
 
@@ -262,4 +264,19 @@ GRAVITY/
 - **Laptop:** la pantalla principal es GRAVITY tipo JARVIS. Desde ahí se abren los módulos.
 - **Teléfono:** app normal, sin pantalla tipo JARVIS; GRAVITY es una función más (botón de micrófono).
 - **Diseño UX/UI común:** se define en paralelo en `DISENO_UX_UI.md`.
+
+---
+
+## D13. Datos sensibles de Hábitos: dos modos — confirmada (20/oct/2026)
+
+**Decisión.** El diario de oración y los hábitos sensibles (p. ej. cigarrillo) se pueden guardar de **dos formas**, a elegir en Ajustes por tipo de dato:
+
+| Modo | Cómo funciona | Se ve en la laptop |
+|---|---|---|
+| **Cifrado en la nube** | Se cifra en el teléfono antes de subirlo a Supabase; la llave solo la tiene el usuario. Ni el servidor ni otros roles pueden leerlo | Sí |
+| **Solo en el teléfono** | No sale del dispositivo; entra en la copia de seguridad local del teléfono | No |
+
+- Ninguno de los dos modos se envía a la IA (D3 y diseño de HÁBITOS, sección 10).
+- El valor por defecto se fija en la especificación de la Fase 3.
+- Si se pierde la llave del modo cifrado, esos datos no se pueden recuperar: la especificación debe incluir cómo respaldar la llave.
 
