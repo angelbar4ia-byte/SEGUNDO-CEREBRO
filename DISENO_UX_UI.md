@@ -3,6 +3,8 @@
 > **Versión 0.1 (20/oct/2026), borrador para definir juntos.** Documento común de experiencia y diseño visual de toda la app: la **pantalla principal de GRAVITY en la laptop** y la **app del teléfono**. Las pantallas de cada módulo siguen en sus diseños (FINANZAS, sección 8; HÁBITOS, Anexo G) y deben respetar este documento.
 >
 > **(decidido)** = ya lo confirmaste. **(propuesto)** = sugerencia para revisar. Las preguntas para definir están en la sección 11.
+>
+> **Bocetos para comparar** (lienzo privado): [GRAVITY — estilos de pantalla](https://claude.ai/artifact/M4y2F9SJJvqXVKXjDJ7rwT). Tres estilos de la pantalla principal de la laptop (A futurista, B minimalista oscuro, C claro sereno) y dos pantallas del teléfono (Hoy del Dueño y Mi turno de la cuidadora). Los datos que aparecen son ejemplos.
 
 ---
 
