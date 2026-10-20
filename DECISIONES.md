@@ -22,7 +22,7 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D12 | Laptop con pantalla principal de GRAVITY tipo JARVIS; teléfono como app normal | Confirmada |
 | D13 | Datos sensibles de Hábitos: cifrados en la nube o solo en el teléfono, a elegir | Confirmada |
 | D14 | Tablet portátil de la casa con cambio de usuario | Confirmada (detalles propuestos) |
-| D15 | Smartwatch | Confirmada (detalles propuestos) |
+| D15 | Pulsera smart band (reloj Wear OS a futuro) | Confirmada (detalles propuestos) |
 | D16 | APIs documentadas con OpenAPI y Swagger UI | Confirmada (detalles propuestos) |
 
 ---
@@ -268,7 +268,7 @@ GRAVITY/
 - **Teléfono:** app normal, sin pantalla tipo JARVIS; GRAVITY es una función más (botón de micrófono).
 - **Diseño UX/UI común:** se define en paralelo en `DISENO_UX_UI.md`.
 - **Estilo configurable** (20/oct/2026): varios estilos (futurista, minimalista, claro, arquitectónico, glass, swagger), claro/oscuro automático por hora y personalidad por módulo y submódulo, sin perder una base común. **Voces configurables** por persona. Detalle en `DISENO_UX_UI.md`.
-- **Estilo por defecto: Futurista** (20/oct/2026), con versión de día y de noche. La vista en planta de la tablet se descartó.
+- **Estilo por defecto: Futurista** (20/oct/2026), con versión de día y de noche. La vista en planta de la tablet se descartó. **Núcleo:** anillos que giran; más opciones después.
 
 ---
 
@@ -293,18 +293,19 @@ GRAVITY/
 
 **Propuesto**
 - **Modo Casa** en reposo: usa la cuenta de rol **Casa** (D5), sin dinero ni datos clínicos. Muestra GRAVITY, lo de hoy en la casa, la cocina, el turno de cuidados con recordatorios genéricos y los avisos.
-- **Contextos** según dónde se use: General, Cocina, Gimnasio y Cuidados. Cambian los gadgets, el tamaño de letra y la personalidad.
+- **Contextos** según dónde se use (confirmado, ampliables): para empezar General, Cocina, Gimnasio y Cuidados; se pueden agregar más. Cambian los gadgets, el tamaño de letra y la personalidad.
+- **Orientación:** horizontal y vertical (confirmado).
 - **Cambio de usuario:** cada persona entra con PIN o huella y ve sus pantallas según su rol; tras 2 minutos sin uso (editable) regresa al modo Casa. La cuidadora y la hermana pueden trabajar su turno desde ahí.
 - **Micrófono propio de GRAVITY en casa:** botón "Mantén para hablar" y la palabra *"Gravity"* solo mientras carga, para cuidar la batería. Permite la conversación libre que las bocinas Xiaomi no permiten (D6).
 - **Vista en planta:** descartada (20/oct/2026).
 
-**Pendiente.** Qué tablet usar y si se usará más en horizontal o en vertical.
+**Pendiente.** Qué contextos se agregan.
 
 ---
 
 ## D15. Smartwatch — confirmada (20/oct/2026; detalles propuestos)
 
-**Decisión.** El sistema contempla un **smartwatch** para pantallas de un vistazo.
+**Decisión.** El sistema contempla un dispositivo de muñeca para pantallas de un vistazo. **Hoy es una pulsera smart band**, probablemente de la serie 4 (falta confirmar marca y modelo).
 
 **Propuesto, en dos niveles**
 1. **Notificaciones con acciones** (*Hecho*, *Posponer*, *Ya se dio*): salen de las notificaciones del teléfono, funcionan con casi cualquier reloj enlazado y casi no cuestan desarrollo. Disponibles desde que existan las alertas (Fases 2 y 3).
@@ -312,7 +313,9 @@ GRAVITY/
 
 **Reglas.** Sin montos de dinero en el reloj (solo el semáforo); una pregunta y como máximo dos botones por pantalla; los datos del reloj (pasos, ritmo cardiaco, sueño) entran por Health Connect cuando el reloj los comparte.
 
-**Pendiente.** Marca y modelo del reloj; si la cuidadora usa reloj.
+**Con la pulsera actual:** solo el nivel 1, con texto y vibración (probablemente sin botones). El nivel 2 queda para cuando haya un reloj Wear OS.
+
+**Pendiente.** Marca y modelo exactos de la pulsera; si la cuidadora usa pulsera o reloj.
 
 ---
 

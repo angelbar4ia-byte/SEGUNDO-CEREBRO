@@ -1,6 +1,6 @@
 # Diseño UX/UI de GRAVITY
 
-> **Versión 0.4 (20/oct/2026), borrador para definir juntos.** Documento común de experiencia y diseño visual de toda la app: la **pantalla principal de GRAVITY en la laptop**, las **pantallas de los módulos**, la **app del teléfono**, la **tablet portátil de la casa** y el **smartwatch**. Las pantallas de cada módulo siguen en sus diseños (FINANZAS, sección 8; HÁBITOS, Anexo G) y deben respetar este documento.
+> **Versión 0.5 (20/oct/2026), borrador para definir juntos.** Documento común de experiencia y diseño visual de toda la app: la **pantalla principal de GRAVITY en la laptop**, las **pantallas de los módulos**, la **app del teléfono**, la **tablet portátil de la casa** y la **pulsera (smart band)**. Las pantallas de cada módulo siguen en sus diseños (FINANZAS, sección 8; HÁBITOS, Anexo G) y deben respetar este documento.
 >
 > **(decidido)** = ya lo confirmaste. **(propuesto)** = sugerencia para revisar. Las preguntas para definir están en la sección 22.
 >
@@ -16,7 +16,7 @@
 
 | Tema | Decisión | Origen |
 |---|---|---|
-| Plataformas | Laptop Windows con el sistema completo; teléfono Android con lo mínimo; **tablet portátil de la casa**; **smartwatch** | D4, D14, D15 |
+| Plataformas | Laptop Windows con el sistema completo; teléfono Android con lo mínimo; **tablet portátil de la casa**; **pulsera smart band** (reloj Wear OS a futuro) | D4, D14, D15 |
 | Laptop | Pantalla principal de GRAVITY **tipo JARVIS** | D12 |
 | Teléfono | **App normal**, sin pantalla tipo JARVIS; GRAVITY como botón de micrófono | D12 |
 | Estilo | **Configurable**; **por defecto, A · Futurista** | 20/oct/2026 |
@@ -25,7 +25,8 @@
 | Personalidad | **Cambia por módulo y submódulo**, sin volverse "tutifruti": personalidad con uso y función | 20/oct/2026 |
 | Gadgets | Medidores, contadores, anillos y relojes en lugar de pantallas planas | 20/oct/2026 |
 | Voces | **Se pueden cambiar** | 20/oct/2026 |
-| Tablet | **Portátil**: se lleva a donde se use. **Sin vista en planta** | D14 |
+| Tablet | **Portátil**, en horizontal y en vertical; **contextos ampliables**; sin vista en planta | D14 |
+| Núcleo de GRAVITY | **Anillos que giran** (Futurista); más opciones después | 20/oct/2026 |
 | Base | Material 3 | HÁBITOS G.1 |
 | Colores de Hábitos por área | Espiritual violeta, Salud verde, Inglés naranja, Personal azul verdoso, Laboral gris azulado, Hábitos a eliminar terracota (nunca rojo de alarma) | HÁBITOS G.1 |
 | Tono | Cercano y sin culpa: un fallo es un "ajuste", no un error | HÁBITOS G.1 y G.7 |
@@ -38,7 +39,7 @@
 
 ## 2. Principios (propuesto)
 
-1. **Una app, varias formas de uso.** En la laptop se piensa y se planea; en el teléfono se actúa; en la tablet se comparte la casa; en el reloj se mira y se confirma.
+1. **Una app, varias formas de uso.** En la laptop se piensa y se planea; en el teléfono se actúa; en la tablet se comparte la casa; en la pulsera se mira.
 2. **Personalidad con propósito.** Cada cambio visual responde al uso: en la bici, números enormes porque se ven de reojo y en movimiento; en Finanzas, calma y precisión.
 3. **Cada persona ve solo lo suyo.** La interfaz se arma según el rol (D5): nada de pantallas vacías ni botones bloqueados por permisos.
 4. **Primero lo de hoy.** Al abrir, lo que toca ahora; el detalle, a un toque o un clic.
@@ -56,7 +57,7 @@
 |---|---|---|---|
 | **Tú, en la laptop** | Escritorio | Planear, revisar y configurar; sesiones largas | Pantalla con mucha información, atajos de teclado, voz, paneles |
 | **Tú, en el teléfono** | Súper, coche, bici, calle | Prisa, una mano, a veces sin señal | Botón "+" siempre visible, registro en segundos, modo de solo audio al manejar |
-| **Tú, en el reloj** | Bici, gimnasio, en movimiento | Un vistazo, una mano o ninguna | Una pregunta por pantalla y como máximo dos botones |
+| **Tú, en la pulsera** | Bici, gimnasio, en movimiento | Un vistazo, sin manos | Avisos cortos que se entienden solos |
 | **Cualquiera, en la tablet** | Donde se lleve: cocina, gimnasio, recámara de papá, sala | De pasada, con las manos ocupadas, varias personas | Contexto según dónde se use, voz, cambio de usuario rápido |
 | **Pareja** | Teléfono | Lo suyo y el resumen del presupuesto | Igual que el tuyo, pero reducido |
 | **Cuidadora** | Teléfono o tablet, en su turno | Atiende a una persona con Alzheimer, con interrupciones constantes; quizá con poca experiencia en apps | Botones grandes, pocas opciones, lenguaje simple, confirmar en un toque, todo en "Mi turno" |
@@ -210,29 +211,27 @@ Cada gadget responde a una pregunta concreta y toma el estilo activo y la person
 
 - **Dispositivo:** tablet Android **portátil**, compartida en la casa; se lleva a donde se use. Es la misma app con diseño para tablet, en horizontal y en vertical.
 - **Modo Casa** (al encender y en reposo): rol Casa (D5). Muestra GRAVITY, lo de hoy en la casa, la cocina, el turno de cuidados con recordatorios genéricos y los avisos. Sin dinero ni datos clínicos.
-- **Contextos** *(propuesto)*: arriba se elige dónde se está usando, **General · Cocina · Gimnasio · Cuidados**, y cambian los gadgets, el tamaño de letra y la personalidad. Ejemplos: en Cocina, la receta paso a paso con letra enorme y voz; en Gimnasio, la serie y el descanso; en Cuidados, "Mi turno" (con la sesión de la cuidadora).
+- **Contextos (decidido, ampliables):** arriba se elige dónde se está usando. Para empezar: **General · Cocina · Gimnasio · Cuidados**; se pueden agregar más (p. ej. Estudio, Sala, Lectura, Cochera). Cada contexto define sus gadgets, el tamaño de letra y la personalidad. Ejemplos: en Cocina, la receta paso a paso con letra enorme y voz; en Gimnasio, la serie y el descanso; en Cuidados, "Mi turno" (con la sesión de la cuidadora).
 - **Cambio de usuario:** se toca un nombre y se entra con PIN o huella a las pantallas de esa persona según su rol. Después de 2 minutos sin uso (editable) regresa sola al modo Casa.
 - **GRAVITY en la tablet:** botón **"Mantén para hablar"** siempre; la palabra *"Gravity"* solo mientras carga, para no gastar batería *(propuesto)*. Aquí sí hay conversación libre, algo que las bocinas Xiaomi no permiten (D6).
 - **Vista en planta:** descartada.
 
 ---
 
-## 12. Smartwatch (D15)
+## 12. Pulsera (smart band) y reloj (D15)
 
-**Principio:** un vistazo y una acción. Cada pantalla responde una pregunta y tiene como máximo dos botones.
+**Dispositivo actual:** una pulsera smart band, probablemente de la serie 4 (falta confirmar marca y modelo). Este tipo de pulsera no permite instalar apps propias y normalmente solo muestra el texto de los avisos y vibra, sin los botones de la app *(a verificar con el modelo exacto)*.
 
-| Nivel | Qué incluye | Costo de desarrollo |
+| Nivel | Qué incluye | Con tu pulsera |
 |---|---|---|
-| **1. Notificaciones con acciones** | Los avisos del teléfono llegan al reloj con sus botones (*Hecho*, *Posponer*, *Ya se dio*). Funciona con casi cualquier reloj enlazado al teléfono | Casi nulo: sale de las notificaciones del teléfono |
-| **2. App propia del reloj** | Pantallas y accesos rápidos: anillos del día, bici en vivo, SOS antojo, medicamento de la cuidadora, serie y descanso | Solo si el reloj es **Wear OS**; se construye aparte |
-
-**Pantallas propuestas** (boceto *Smartwatch*): Hoy (anillos), Bici en vivo, notificación con acciones, Cuidadora · medicamento y SOS antojo.
+| **1. Avisos** | Los avisos del teléfono llegan con texto corto y vibración; con un reloj compatible, también con botones (*Hecho*, *Posponer*, *Ya se dio*) | **Sí**, con texto y vibración |
+| **2. App propia** | Pantallas y accesos rápidos: anillos del día, bici en vivo, SOS antojo, medicamento de la cuidadora, serie y descanso | **No**: requiere un reloj **Wear OS** |
 
 **Reglas (propuesto)**
-- **Sin montos de dinero en el reloj:** solo el semáforo de la semana.
-- La información de cuidados en el reloj de la cuidadora es la de su turno; en el tuyo, la del resumen.
-- Personalidad sport en bici y entrenamiento; Futurista en lo demás.
-- Los datos del reloj (pasos, ritmo cardiaco, sueño) entran por Health Connect cuando el reloj los comparte.
+- **Avisos cortos que se entienden solos**, porque la pantalla es pequeña: *"Inglés 20:00"*, *"Medicamento 20:00"*. Lo que requiere una acción se hace en el teléfono.
+- **Sin montos de dinero** en la pulsera ni en el reloj.
+- Los datos de la pulsera (pasos, ritmo cardiaco, sueño) entran a Hábitos por Health Connect si su app los comparte *(a verificar)*.
+- El boceto del reloj redondo queda como referencia para cuando haya un reloj Wear OS; las mismas reglas aplican.
 
 ---
 
@@ -261,7 +260,7 @@ Cuidados, Casa y Alimentación aparecen cuando llegan sus fases (5, 6 y 7).
 
 **Tablet:** modo Casa con contextos, cambio de usuario y, por usuario, las pantallas del teléfono con diseño de tablet.
 
-**Reloj:** nivel 1 desde que existan las notificaciones (Fases 2 y 3); nivel 2 en las ampliaciones.
+**Pulsera:** avisos desde que existan las notificaciones (Fases 2 y 3); app propia solo si después hay un reloj Wear OS.
 
 ---
 
@@ -312,7 +311,7 @@ Todos se pueden cambiar en Ajustes.
 
 ## 17. Notificaciones (propuesto)
 
-| Tipo | En la pantalla bloqueada y el reloj | Al abrir |
+| Tipo | En la pantalla bloqueada y la pulsera | Al abrir |
 |---|---|---|
 | Pago próximo | *"Tienes un pago próximo"* | Detalle con monto |
 | Categoría excedida | *"Revisa una categoría"* | Detalle |
@@ -370,7 +369,7 @@ Todos se pueden cambiar en Ajustes.
 
 - Montos ocultables y modo privado en la laptop.
 - Modo Casa en la tablet sin dinero ni datos clínicos; lo personal solo tras PIN o huella.
-- Sin montos en el reloj.
+- Sin montos en la pulsera ni en el reloj.
 - Notificaciones discretas en dinero, hábitos sensibles y cuidados (sección 17).
 - PIN o huella en el teléfono; en la laptop, GRAVITY se bloquea tras un rato sin uso *(propuesto)*.
 
@@ -378,24 +377,23 @@ Todos se pueden cambiar en Ajustes.
 
 ## 22. Preguntas para definir juntos
 
-**Reloj y tablet**
-1. **¿Qué smartwatch tienes (marca y modelo)?** Define si se puede hacer el nivel 2 (Wear OS). ¿La cuidadora usa reloj?
-2. ¿Iconos sobrios como en los bocetos, o prefieres emojis?
-3. **Tablet:** ¿ya tienes una? ¿La usarías más en horizontal o en vertical? ¿Te sirven los contextos General, Cocina, Gimnasio y Cuidados, o cambias alguno?
+**Pulsera y tablet**
+1. **Pulsera:** marca y modelo exactos (aparecen en su app del teléfono o en la caja). ¿La cuidadora usa pulsera o reloj?
+2. **Contextos de la tablet:** además de General, Cocina, Gimnasio y Cuidados, ¿cuáles agregas?
+3. ¿Iconos sobrios como en los bocetos, o prefieres emojis?
 
 **GRAVITY**
 
-4. **Núcleo central:** ¿anillos que giran (A) u otra forma?
-5. **Paneles al abrir la laptop:** ¿hoy, finanzas, hábitos, cuidados, avisos? ¿Agregas clima, correo u otro?
-6. ¿GRAVITY te saluda en voz alta al encender la laptop?
+4. **Paneles al abrir la laptop:** ¿hoy, finanzas, hábitos, cuidados, avisos? ¿Agregas clima, correo u otro?
+5. ¿GRAVITY te saluda en voz alta al encender la laptop?
 
 **Colores, cuidadora y atajos**
 
-7. Tamaño de letra cómodo para ti, para la lectura de la Biblia y para la cuidadora.
-8. ¿Algún color que te guste o quieras evitar?
-9. ¿Qué tanto usa apps la cuidadora? ¿Letra grande desde el inicio?
-10. En el teléfono de la cuidadora, ¿la app se ve con el nombre "GRAVITY" o con otro más sencillo?
-11. ¿Te sirven los atajos de la sección 15?
+6. Tamaño de letra cómodo para ti, para la lectura de la Biblia y para la cuidadora.
+7. ¿Algún color que te guste o quieras evitar?
+8. ¿Qué tanto usa apps la cuidadora? ¿Letra grande desde el inicio?
+9. En el teléfono de la cuidadora, ¿la app se ve con el nombre "GRAVITY" o con otro más sencillo?
+10. ¿Te sirven los atajos de la sección 15?
 
 *Los roles y permisos financieros entre miembros (albacea, confirmaciones, qué registra la pareja) no son de UX/UI: se definen en la especificación de Finanzas.*
 
@@ -409,3 +407,4 @@ Todos se pueden cambiar en Ajustes.
 | 0.2 | 20/oct/2026 | Bocetos A, B y C y recomendación de estilo; pantalla dentro de un módulo; mapa de pantallas de las fases 0 a 3; flujos clave; atajos; voz y personalidad de GRAVITY; notificaciones |
 | 0.3 | 20/oct/2026 | Estilo configurable en cuatro capas; estilos D arquitectónico, E glass y F swagger; claro/oscuro automático por hora; personalidad por módulo y submódulo; gadgets; tablet maestra de la casa con cambio de usuario; voces configurables; la pregunta sobre la pareja pasa a la especificación de Finanzas |
 | 0.4 | 20/oct/2026 | Futurista por defecto (con versión de día); Swagger como estilo y como herramienta (Ajustes › Desarrollador, D16); tablet portátil con contextos y sin vista en planta; smartwatch en dos niveles (D15) |
+| 0.5 | 20/oct/2026 | Pulsera smart band en lugar de smartwatch (app propia solo con reloj Wear OS); tablet en horizontal y vertical con contextos ampliables; núcleo con anillos que giran. Ronda cerrada, en espera de nuevas instrucciones |

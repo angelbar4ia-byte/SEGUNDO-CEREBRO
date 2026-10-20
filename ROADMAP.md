@@ -1,6 +1,6 @@
 # Roadmap de GRAVITY (proyecto Segundo Cerebro)
 
-> **Versión 0.4 (20/oct/2026), aprobada.** La construcción **empieza cuando el dueño del proyecto dé la orden**. Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
+> **Versión 0.5 (20/oct/2026), aprobada.** La construcción **empieza cuando el dueño del proyecto dé la orden**. Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
 >
 > Este archivo vive en la raíz de SEGUNDO-CEREBRO mientras se confirma D10; después pasa a `GRAVITY/docs/`.
 
@@ -100,7 +100,7 @@ Base: diseño de FINANZAS v23, sección 10 (MVP 2).
 | Ahorro con métodos y fondo de emergencia por niveles (5.5 bis) | Completo | Ver el avance |
 | Alertas de vencimiento (notificaciones del teléfono y avisos al instante) | Configurar | Recibirlas |
 
-**Smartwatch (D15, nivel 1):** las alertas llegan al reloj con sus acciones, sin app propia.
+**Pulsera (D15, nivel 1):** las alertas llegan a la pulsera como avisos cortos con vibración, sin app propia.
 
 **Queda para después:** simulador completo de estrategias de pago (5.3 ter), estimador de intereses con estados de cuenta, beneficios de tarjetas, inversión, bienes y previsión.
 
@@ -165,7 +165,7 @@ Por bloques, cada uno con su pasada funcional y su pulido.
 - **Finanzas:** modo Pareja y Familiar completo (transferencias con confirmación, albacea, auditoría), conciliación con estados de cuenta en la laptop (los archivos no se suben), simulador de deudas y estimador de intereses, beneficios de tarjetas, inversión, objetivos y plan, bienes y previsión, reportes, y voz e imagen en el teléfono.
 - **Hábitos:** salud (sueño, entrenamiento, suplementos, medidas), bicicleta y música, inglés y modo traslado, estudios bíblicos ampliados, pareja, Health Connect y el coach, que pasa a ser parte de GRAVITY.
 - **GRAVITY:** equipo dedicado para el puente de casa (D9, fase 2), micrófono propio en casa e IA local en la laptop para analizar dinero (D3).
-- **Smartwatch (D15, nivel 2):** app propia del reloj, si es Wear OS.
+- **Reloj Wear OS (D15, nivel 2):** app propia, solo si más adelante se cambia la pulsera por un reloj Wear OS.
 
 ---
 
@@ -197,3 +197,4 @@ Por bloques, cada uno con su pasada funcional y su pulido.
 | 0.2 | 20/oct/2026 | Aprobado: orden de las fases 5 a 7, Finanzas MVP 1 y 2 como prioritarios, lectura espiritual en el teléfono y los dos modos para datos sensibles (D13). La construcción espera la orden de inicio |
 | 0.3 | 20/oct/2026 | Tablet de la casa (D14) y sistema de estilos en la Fase 0; los demás estilos, la personalidad por módulo y los gadgets en el Pulido 1; los roles financieros entre miembros se definen en la especificación de la Fase 1 |
 | 0.4 | 20/oct/2026 | Futurista por defecto; tablet portátil con contextos; APIs documentadas con OpenAPI y Swagger UI desde la Fase 0 (D16); smartwatch: notificaciones desde la Fase 2 y app propia en las ampliaciones (D15) |
+| 0.5 | 20/oct/2026 | Pulsera smart band en lugar de smartwatch (app propia solo con reloj Wear OS); tablet en horizontal y vertical con contextos ampliables |
