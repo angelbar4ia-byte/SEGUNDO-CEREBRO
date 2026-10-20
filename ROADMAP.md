@@ -1,0 +1,180 @@
+# Roadmap de GRAVITY (proyecto Segundo Cerebro)
+
+> **Versión 0.1 (20/oct/2026), borrador para revisar.** Plan de ejecución de la app única (D1): la **laptop Windows** con el sistema completo y el **teléfono Android** con lo mínimo (D4). Las decisiones de arquitectura están en `DECISIONES.md`; el diseño visual se define en paralelo en `DISENO_UX_UI.md`.
+>
+> Este archivo vive en la raíz de SEGUNDO-CEREBRO mientras se confirma D10; después pasa a `GRAVITY/docs/`.
+
+---
+
+## 1. Cómo se construye
+
+1. **Prioridad:** Finanzas (submódulos prioritarios) → Hábitos (módulos prioritarios) → lo demás.
+2. **Funcional primero, pulido después.** Cada módulo pasa dos veces:
+   - **Funcional:** hace lo que debe con datos reales, reglas correctas y pruebas de la lógica; pantallas sencillas con el tema base.
+   - **Pulido:** se aplica el diseño UX/UI, se corrige lo que estorbe al usarlo y se agregan opciones y casos raros.
+   - Para que el pulido no obligue a rehacer: colores, tipografías y espaciados salen de un **tema central** desde el primer día, y la lógica va separada de las pantallas.
+3. **Cada fase termina con algo usable** en la laptop y en el teléfono reales (Windows y el Samsung Galaxy A52 de pruebas).
+4. **Antes de programar cada fase, una especificación corta:** qué entra, modelo de datos, pantallas, criterios de aceptación (tomados de las pruebas de los diseños) y preguntas abiertas. Es el formato de desarrollo guiado por especificaciones que ya preveían FINANZAS (pendiente 29) y HÁBITOS (Anexo I).
+5. **Laptop completa, teléfono mínimo (D4):** cada fase dice qué va en cada uno.
+6. Todo cambio a este roadmap se anota en el control de cambios.
+
+---
+
+## 2. Vista general
+
+| Fase | Qué | Resultado utilizable |
+|---|---|---|
+| **0** | Cimientos + pantalla principal de GRAVITY (sin IA) | Entrar con tu cuenta en laptop y teléfono; cada rol ve solo lo suyo |
+| **1** | Finanzas MVP 1 | Saber cuánto entra, cuánto sale y cuánto queda en la semana |
+| **2** | Finanzas MVP 2 | Ver deudas y compromisos, apartar ahorro y recibir alertas |
+| **3** | Hábitos MVP | Objetivos, Hoy, cigarrillo y azúcar, agenda, espiritual y revisión semanal |
+| **4** | Pulido 1 | Finanzas y Hábitos con el diseño UX/UI y los ajustes del uso real |
+| 5 *(propuesto)* | Cuidados | Turnos, medicamentos, comidas de papá, bitácora y entrega de turno |
+| 6 *(propuesto)* | GRAVITY asistente | Conversación con IA, voz, control de la laptop y bocinas Xiaomi |
+| 7 *(propuesto)* | Alimentación | Menús, recetas, lista de compras y precios |
+| 8+ *(propuesto)* | Ampliaciones | Lo demás de Finanzas, Hábitos y GRAVITY, por bloques |
+
+Las fases 0 a 4 siguen la prioridad que definiste. El orden de la 5 en adelante es una propuesta (pregunta 1 de la sección 10).
+
+---
+
+## 3. Fase 0 — Cimientos
+
+**Antes de empezar:** juntar los repositorios (D10, si se confirma), convertir el contrato v2.0 en reglas internas entre módulos (v3.0) y escribir la especificación de la fase.
+
+**Incluye**
+- Proyecto Flutter con dos salidas: **Windows (completa)** y **Android (mínima)**; estructura por módulos; tema central claro y oscuro.
+- **Supabase (D7):** proyecto real y versión local para desarrollo; cuentas (correo o Google); tablas base de hogar, personas y roles; reglas por registro (RLS) para los roles de D5.
+- **Firebase (D7):** avisos al instante (FCM), reporte de fallas (Crashlytics) y reparto de la app (App Distribution).
+- **Teléfono:** cola local de registros para trabajar sin conexión y bloqueo con PIN o huella.
+- **Laptop:** copia de seguridad diaria de la base de datos, más una copia cifrada fuera de la laptop.
+- **Pantalla principal de GRAVITY en la laptop**, versión sin IA: saludo, fecha y hora, resumen del día (se llena conforme entran los módulos), acceso a los módulos y **barra de comandos** de texto para navegar (*"abre presupuesto"*). Estilo tipo JARVIS según `DISENO_UX_UI.md`.
+- **Teléfono:** app normal con barra inferior según el rol, sin pantalla tipo JARVIS.
+
+**Aceptación**
+1. Entras con tu cuenta en la laptop y en el teléfono.
+2. Una cuenta de prueba con rol Cuidador solo ve Cuidados (vacío). Una con rol Familiar no ve dinero, comprobado en el servidor y no solo en la pantalla.
+3. Un registro hecho sin internet en el teléfono se sube al volver la señal.
+4. La copia de seguridad diaria se genera y se puede restaurar en el entorno local.
+5. La app llega a un teléfono de prueba por App Distribution.
+
+---
+
+## 4. Fase 1 — Finanzas MVP 1 (funcional)
+
+Base: diseño de FINANZAS v23, sección 10 (MVP 1).
+
+| Submódulo | Laptop | Teléfono |
+|---|---|---|
+| Hogar y perfiles (modo Individual, con las personas de D5) | Alta y configuración | — |
+| Cuentas y libro de movimientos (solo-agregar; se corrige con anulación y contraasiento) | Completo | Se alimenta al registrar |
+| Ingresos (forma y día de pago por miembro, extras) | Completo | Registrar un ingreso extra |
+| Gastos (captura manual, categorías de hasta 3 niveles, división por líneas) | Completo | **Registrar un gasto en menos de 10 s** |
+| Presupuesto semanal (motor y cascada ingreso → presupuesto → deuda → remanente) | Completo | Resumen de la semana con semáforo |
+| Tablero | Completo | — |
+| Datos semilla (importar Excel/CSV) | Importación | — |
+
+**Queda para después:** captura por voz e imagen (foto, OCR, QR), modo Pareja y Familiar completo, conciliación con estados de cuenta y reportes de auditoría.
+
+**Aceptación:** las pruebas del motor de presupuesto (5.6 bis) y del libro de movimientos (5.0 bis) pasan; registrar un gasto en el teléfono toma menos de 10 s; la app abre en menos de 2 s (decisión 24 de FINANZAS).
+
+**Para usarla con tus datos reales** (no bloquea programar): tus ingresos reales (pendientes 24 y 25 de FINANZAS) y revisar las decisiones marcadas "por defecto" (pendiente 13).
+
+---
+
+## 5. Fase 2 — Finanzas MVP 2 (funcional)
+
+Base: diseño de FINANZAS v23, sección 10 (MVP 2).
+
+| Submódulo | Laptop | Teléfono |
+|---|---|---|
+| Deudas: préstamos, tarjetas y MSI, con orden de pago por costo (5.3) | Completo | Ver los próximos pagos |
+| Ahorro con métodos y fondo de emergencia por niveles (5.5 bis) | Completo | Ver el avance |
+| Alertas de vencimiento (notificaciones del teléfono y avisos al instante) | Configurar | Recibirlas |
+
+**Queda para después:** simulador completo de estrategias de pago (5.3 ter), estimador de intereses con estados de cuenta, beneficios de tarjetas, inversión, bienes y previsión.
+
+**Para usarla con tus datos reales:** llenar la ficha de deudas y tarjetas (pendiente 8) y las compras a MSI actuales (pendiente 12).
+
+---
+
+## 6. Fase 3 — Hábitos MVP (funcional)
+
+Base: diseño de HÁBITOS v1.18, Anexo H, etapas 1 a 5 (la etapa 0 ya está cubierta por la Fase 0).
+
+| Módulo | Laptop | Teléfono |
+|---|---|---|
+| Núcleo: objetivos (asistente SMART), Hoy, registro, rachas y carga del día | Crear y ajustar objetivos; ver el día | **Hoy:** marcar, posponer, omitir |
+| Hábitos a eliminar: cigarrillo y azúcar (línea base, fases, Día D) | Configurar el plan; ver patrones | Registro en un toque; **SOS "Tengo un antojo"** |
+| Agenda y asistente de configuración | Agenda completa y asistente | Ver el día; recordatorios con acciones |
+| Espiritual (MVP): lector, plan de lectura, devocional y oración | Completo | Lector, devocional y oración *(por confirmar, pregunta 3)* |
+| Progreso y revisión semanal (sábados) | Revisión y gráficas | Aviso y resumen |
+
+Algunas funciones de Hábitos se usan **en el momento** y por eso van en el teléfono aunque no sean "lo mínimo": el SOS, el registro de consumo y, si lo confirmas, la lectura.
+
+**Aceptación:** los criterios de las etapas 1 a 5 del Anexo H y de las pantallas G.10.1 (Hoy) y G.10.3 (panel de hábito a eliminar).
+
+**Decisiones de esta fase**
+- **Diario de oración y hábitos sensibles.** El diseño dice que el diario "no se envía a ningún servicio", pero con la nube compartida (D7) quedaría guardado en Supabase. Hay dos opciones: cifrarlo en el teléfono antes de subirlo (solo tú lo puedes leer, también en la laptop) o dejarlo solo en el teléfono (pregunta 4).
+- **Licencias de la Biblia:** se arranca con versiones de dominio público (RVR1909 y KJV) mientras se resuelve RVR1960 y NVI (Anexo H, etapa 4).
+
+---
+
+## 7. Fase 4 — Pulido 1
+
+- Aplicar el sistema de diseño de `DISENO_UX_UI.md` a la pantalla de GRAVITY, a Finanzas y a Hábitos.
+- Corregir la lista de "lo que estorba" juntada durante el uso real de las fases 1 a 3.
+- Cumplir las metas de rendimiento: abrir en menos de 2 s, registrar un gasto en menos de 10 s y la acción diaria de Hábitos en 3 toques o menos.
+- Traer de "después" lo que haya resultado urgente.
+
+---
+
+## 8. Fases siguientes (orden propuesto)
+
+### Fase 5 — Cuidados (funcional)
+- **Teléfono (cuidadoras):** mi turno y entrega de turno, horario de medicamentos y marcar los que ya se dieron, comidas de papá (comió, comió poco, rechazó), bitácora y gastos de cuidado.
+- **Laptop (Dueño):** medicamentos, citas, turnos y cuidadoras, resumen y costos. Los gastos de cuidado pasan a Finanzas con confirmación.
+- **Cambios urgentes** desde el teléfono del Dueño, con aviso al instante a la cuidadora de turno (D4). Recordatorios al teléfono de quien está de turno (D5).
+- **Necesita:** el documento de la app de cuidados actual (pendiente 2 de FINANZAS) y las respuestas pendientes de D5. Mientras tanto se sigue usando la app actual.
+
+### Fase 6 — GRAVITY asistente
+- Conversación por texto con IA en la pantalla principal, con las herramientas de Finanzas, Hábitos y Cuidados según el rol; el dinero nunca pasa por la IA en la nube (D3).
+- Voz en la laptop (escuchar y hablar).
+- Control de la laptop con su lista cerrada de acciones (D8).
+- Puente de casa en la laptop y bocinas Xiaomi con frases fijas (D6 y D9).
+- En el teléfono: GRAVITY por voz como una función más de la app, sin pantalla tipo JARVIS.
+- **Por decidir:** proveedor de IA (FINANZAS eligió empezar con Gemini en su nivel gratuito, decisión 40; HÁBITOS prefería Claude), la lista de acciones de la laptop (D8) y las frases de las bocinas (D6).
+
+### Fase 7 — Alimentación
+- Catálogo, recetas, menú, lista de compras (en el teléfono, para usarla en el súper), historial de precios con alerta y lector de código de barras (FINANZAS, fase 3 de su hoja de ruta).
+- El plan de comidas llega directo a Hábitos (marcar cumplimiento) y a Cuidados (comidas de papá), ya dentro de la misma app y sin archivos.
+
+### Fase 8+ — Ampliaciones
+Por bloques, cada uno con su pasada funcional y su pulido.
+- **Finanzas:** modo Pareja y Familiar completo (transferencias con confirmación, albacea, auditoría), conciliación con estados de cuenta en la laptop (los archivos no se suben), simulador de deudas y estimador de intereses, beneficios de tarjetas, inversión, objetivos y plan, bienes y previsión, reportes, y voz e imagen en el teléfono.
+- **Hábitos:** salud (sueño, entrenamiento, suplementos, medidas), bicicleta y música, inglés y modo traslado, estudios bíblicos ampliados, pareja, Health Connect y el coach, que pasa a ser parte de GRAVITY.
+- **GRAVITY:** equipo dedicado para el puente de casa (D9, fase 2), micrófono propio en casa e IA local en la laptop para analizar dinero (D3).
+
+---
+
+## 9. En paralelo
+
+- **`DISENO_UX_UI.md`:** se define contigo durante las fases 0 a 3 y se aplica en el Pulido 1. Mientras tanto, las pantallas usan el tema base.
+- **Datos para usar la app con tu información** (no bloquean programar): los pendientes de la sección 12.2 de FINANZAS (ingresos, ficha de deudas, estados de cuenta de ejemplo, gastos previsibles, bienes) y las preguntas abiertas de la sección 12 de HÁBITOS.
+
+---
+
+## 10. Preguntas
+
+1. **Después de Hábitos:** propongo Cuidados → GRAVITY asistente → Alimentación. ¿Lo dejamos así o cambias algo? Por ejemplo, adelantar GRAVITY o meter Alimentación en las prioridades de Finanzas.
+2. **Finanzas prioritario:** ¿MVP 1 y 2 son los submódulos que tienes en mente? ¿Agregas o quitas alguno, como la conciliación de estados de cuenta o el simulador de deudas?
+3. **Hábitos en el teléfono:** además del SOS y los registros, ¿quieres el lector bíblico, el devocional y la oración en el teléfono?
+4. **Diario de oración y hábitos sensibles:** ¿cifrados en la nube (se ven en la laptop) o solo en el teléfono?
+
+---
+
+## Control de cambios
+
+| Versión | Fecha | Cambio |
+|---|---|---|
+| 0.1 | 20/oct/2026 | Primera versión: prioridad Finanzas → Hábitos, funcional primero y pulido después, pantalla principal de GRAVITY en la laptop y app normal en el teléfono |

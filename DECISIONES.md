@@ -18,6 +18,8 @@ Cuando las decisiones confirmadas cambian el contrato, se reescribe `CONTRATO_CO
 | D8 | Reglas para controlar la laptop | Propuesta |
 | D9 | Puente de casa (Home Assistant), empezando en la laptop | Confirmada (equipo dedicado: pendiente) |
 | D10 | Todo el código y los documentos en el repositorio GRAVITY | Propuesta |
+| D11 | Prioridad Finanzas → Hábitos; funcional primero, pulido después | Confirmada |
+| D12 | Laptop con pantalla principal de GRAVITY tipo JARVIS; teléfono como app normal | Confirmada |
 
 ---
 
@@ -244,3 +246,20 @@ GRAVITY/
 - **SEGUNDO-CEREBRO:** deja de ser la fuente; queda con un README que apunta a GRAVITY, o se archiva.
 
 **Pendiente.** Confirmar el nombre: la app se llama **GRAVITY** y "Segundo Cerebro" queda como nombre del proyecto.
+
+---
+
+## D11. Prioridad y forma de construir — confirmada (20/oct/2026)
+
+- **Orden:** primero los submódulos prioritarios de **Finanzas**, después los módulos prioritarios de **Hábitos**; lo demás después (orden propuesto en `ROADMAP.md`).
+- **Funcional primero, pulido después:** cada módulo se construye primero funcional y luego se pule con el diseño UX/UI y lo aprendido al usarlo.
+- Detalle por fases en `ROADMAP.md`.
+
+---
+
+## D12. Pantallas: GRAVITY tipo JARVIS en la laptop, app normal en el teléfono — confirmada (20/oct/2026)
+
+- **Laptop:** la pantalla principal es GRAVITY tipo JARVIS. Desde ahí se abren los módulos.
+- **Teléfono:** app normal, sin pantalla tipo JARVIS; GRAVITY es una función más (botón de micrófono).
+- **Diseño UX/UI común:** se define en paralelo en `DISENO_UX_UI.md`.
+
